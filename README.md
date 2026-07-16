@@ -1,17 +1,21 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F2027,50:2C5364,100:00C9FF&height=220&section=header&text=Alok%20Kumar%20Sahoo&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Software%20Engineer%20%7C%20Full-Stack%20%26%20ML%20Enthusiast&descAlignY=55&descSize=20" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&amp;color=0:0F2027,50:2C5364,100:00C9FF&amp;height=220&amp;section=header&amp;text=Alok%20Kumar%20Sahoo&amp;fontSize=55&amp;fontColor=ffffff&amp;animation=fadeIn&amp;fontAlignY=35&amp;desc=Software%20Engineer%20%7C%20Full-Stack%20%26%20ML%20Enthusiast&amp;descAlignY=55&amp;descSize=20" width="100%"/>
 
 <a href="https://linkedin.com/in/alok-kumar-sahoo1445">
-  <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&pause=1000&color=58A6FF&center=true&vCenter=true&width=600&height=50&lines=Software+Engineer;Full-Stack+Developer;ML+%26+AI+Enthusiast;4x+Hackathon+Winner;SIH+2025+National+Finalist" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&amp;pause=1000&amp;color=58A6FF&amp;center=true&amp;vCenter=true&amp;width=600&amp;height=50&amp;lines=Software+Engineer;Full-Stack+Developer;ML+%26+AI+Enthusiast;4x+Hackathon+Winner;SIH+2025+National+Finalist" alt="Typing SVG" />
 </a>
 
 <br/>
 
-<a href="https://linkedin.com/in/alok-kumar-sahoo1445"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
-<a href="mailto:aloknsahoo@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
-<a href="https://github.com/FutureAlok1445"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
+<a href="https://linkedin.com/in/alok-kumar-sahoo1445"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white"/></a>
+<a href="mailto:aloknsahoo@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&amp;logo=gmail&amp;logoColor=white"/></a>
+<a href="https://github.com/FutureAlok1445"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white"/></a>
 
+</div>
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/main/assets/matrix-banner.svg" width="100%"/>
 </div>
 
 <br/>
@@ -33,19 +37,19 @@
 
 **Languages**
 <br/>
-<img src="https://skillicons.dev/icons?i=py,js,ts,java,cpp,mysql&theme=dark"/>
+<img src="https://skillicons.dev/icons?i=py,js,ts,java,cpp,mysql&amp;theme=dark"/>
 
 **Backend & Cloud**
 <br/>
-<img src="https://skillicons.dev/icons?i=nodejs,express,django,docker,gcp&theme=dark"/>
+<img src="https://skillicons.dev/icons?i=nodejs,express,django,docker,gcp&amp;theme=dark"/>
 
 **Frontend**
 <br/>
-<img src="https://skillicons.dev/icons?i=react,redux,html,css&theme=dark"/>
+<img src="https://skillicons.dev/icons?i=react,redux,html,css&amp;theme=dark"/>
 
 **Tools & Platforms**
 <br/>
-<img src="https://skillicons.dev/icons?i=git,github,githubactions,vscode,postgres&theme=dark"/>
+<img src="https://skillicons.dev/icons?i=git,github,githubactions,vscode,postgres&amp;theme=dark"/>
 
 </div>
 
@@ -102,7 +106,7 @@ Dec 2025 – Feb 2026   Software Engineer Intern @ Sapphire Infocom Pvt. Ltd. (R
 <br/>
 
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,50:2C5364,100:0F2027&height=120&section=footer"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&amp;color=0:00C9FF,50:2C5364,100:0F2027&amp;height=120&amp;section=footer"/>
 
 **⭐ Thanks for stopping by — let's build something great!**
 
