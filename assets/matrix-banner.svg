@@ -1,0 +1,367 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient matching the profile header -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0B0F19" />
+    </linearGradient>
+    
+    <!-- Neon Hologram Border Gradient -->
+    <linearGradient id="neon-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#7F00FF" />
+      <stop offset="100%" stop-color="#00FFCC" />
+    </linearGradient>
+
+    <!-- Filters for Glow Effects -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    
+    <filter id="heavy-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur1" />
+      <feGaussianBlur stdDeviation="1.5" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur1" />
+        <feMergeNode in="blur2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- CSS Animations -->
+  <style>
+    .terminal-text {
+      font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: normal;
+    }
+    
+    .status-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* Floating Low-Poly Cat Logo */
+    @keyframes float-cat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(1.5deg); }
+    }
+    .cyber-cat-group {
+      animation: float-cat 4s ease-in-out infinite;
+      transform-origin: 90px 110px;
+    }
+
+    /* Floating 3D Cubes */
+    @keyframes float-cube-1 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .cube-group-1 {
+      animation: float-cube-1 3.2s ease-in-out infinite;
+    }
+
+    @keyframes float-cube-2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-13px); }
+    }
+    .cube-group-2 {
+      animation: float-cube-2 3.8s ease-in-out infinite;
+    }
+
+    @keyframes float-cube-3 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .cube-group-3 {
+      animation: float-cube-3 4.2s ease-in-out infinite;
+    }
+
+    /* Shadow Animations on the Grid Floor */
+    @keyframes shadow-shrink-1 {
+      0%, 100% { transform: scale(1); opacity: 0.25; }
+      50% { transform: scale(0.85); opacity: 0.12; }
+    }
+    .cube-shadow-1 {
+      transform-origin: 610px 245px;
+      animation: shadow-shrink-1 3.2s ease-in-out infinite;
+    }
+
+    @keyframes shadow-shrink-2 {
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(0.8); opacity: 0.1; }
+    }
+    .cube-shadow-2 {
+      transform-origin: 745px 245px;
+      animation: shadow-shrink-2 3.8s ease-in-out infinite;
+    }
+
+    @keyframes shadow-shrink-3 {
+      0%, 100% { transform: scale(1); opacity: 0.25; }
+      50% { transform: scale(0.88); opacity: 0.15; }
+    }
+    .cube-shadow-3 {
+      transform-origin: 630px 245px;
+      animation: shadow-shrink-3 4.2s ease-in-out infinite;
+    }
+
+    /* Floating Hologram Terminal */
+    @keyframes float-terminal {
+      0%, 100% { transform: translate(145px, 45px) skewY(-6deg) rotate(-2deg); }
+      50% { transform: translate(145px, 39px) skewY(-6deg) rotate(-2deg); }
+    }
+    .holo-terminal-group {
+      animation: float-terminal 5s ease-in-out infinite;
+    }
+
+    /* Pulse animations for database indicators */
+    @keyframes pulse-light {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; filter: drop-shadow(0 0 3px currentColor); }
+    }
+    .db-light-1 { animation: pulse-light 1.3s infinite; }
+    .db-light-2 { animation: pulse-light 1.6s infinite; animation-delay: 0.4s; }
+    .db-light-3 { animation: pulse-light 1.9s infinite; animation-delay: 0.8s; }
+
+    /* Blinking Terminal Cursor */
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    .cursor {
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    /* Flashing Code Key */
+    @keyframes key-flash {
+      0%, 100% { fill: #FF007F; filter: drop-shadow(0 0 2px #FF007F); }
+      50% { fill: #00FFCC; filter: drop-shadow(0 0 6px #00FFCC); }
+    }
+    .binary-code {
+      animation: key-flash 2.5s infinite;
+      font-weight: bold;
+    }
+
+    /* Ambient data waves falling */
+    @keyframes data-fall {
+      0% { transform: translateY(-50px); opacity: 0; }
+      20% { opacity: 0.12; }
+      80% { opacity: 0.12; }
+      100% { transform: translateY(220px); opacity: 0; }
+    }
+    .data-stream-1 { animation: data-fall 9s linear infinite; }
+    .data-stream-2 { animation: data-fall 12s linear infinite; animation-delay: 3s; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="300" rx="12" fill="url(#bg-grad)" stroke="#1F2937" stroke-width="1" />
+
+  <!-- 3D Perspective Grid Floor (Bottom half of canvas) -->
+  <g stroke="#00F2FE" stroke-width="0.75" opacity="0.08">
+    <!-- Horizontal Perspective Lines -->
+    <line x1="0" y1="220" x2="800" y2="220" />
+    <line x1="0" y1="240" x2="800" y2="240" opacity="1.3" />
+    <line x1="0" y1="260" x2="800" y2="260" opacity="1.6" />
+    <line x1="0" y1="280" x2="800" y2="280" opacity="2.0" />
+    <line x1="0" y1="295" x2="800" y2="295" opacity="2.5" />
+    
+    <!-- Vanishing perspective lines (Originating from center-horizon) -->
+    <line x1="233" y1="220" x2="-100" y2="300" />
+    <line x1="300" y1="220" x2="100" y2="300" />
+    <line x1="350" y1="220" x2="250" y2="300" />
+    <line x1="383" y1="220" x2="350" y2="300" />
+    <line x1="417" y1="220" x2="450" y2="300" />
+    <line x1="450" y1="220" x2="550" y2="300" />
+    <line x1="500" y1="220" x2="700" y2="300" />
+    <line x1="567" y1="220" x2="900" y2="300" />
+  </g>
+
+  <!-- Ambient Light Source Behind Floating Terminal -->
+  <circle cx="360" cy="130" r="130" fill="#00F2FE" opacity="0.04" filter="url(#heavy-glow)" />
+  <circle cx="680" cy="150" r="80" fill="#7F00FF" opacity="0.05" filter="url(#heavy-glow)" />
+
+  <!-- Background Data Streams -->
+  <g fill="#00FFCC" font-family="monospace" font-size="10" opacity="0.12">
+    <text x="30" y="0" class="data-stream-1">
+      <tspan x="30" dy="12">101011</tspan>
+      <tspan x="30" dy="12">011010</tspan>
+      <tspan x="30" dy="12">110101</tspan>
+    </text>
+    <text x="750" y="-50" class="data-stream-2">
+      <tspan x="750" dy="12">010110</tspan>
+      <tspan x="750" dy="12">101101</tspan>
+      <tspan x="750" dy="12">110010</tspan>
+    </text>
+  </g>
+
+  <!-- ==================== LEFT SIDE: GEOMETRIC CYBER-CAT ==================== -->
+  <g class="cyber-cat-group">
+    <!-- Core Glow backplate -->
+    <polygon points="90,85 60,65 50,105 65,140 90,155 115,140 130,105 120,65" fill="#0E1726" fill-opacity="0.75" />
+    
+    <!-- Wireframe Lines (Low-poly structure) -->
+    <path d="M 90 85 L 60 65 L 50 105 L 65 140 L 90 155 L 115 140 L 130 105 L 120 65 Z 
+             M 90 85 L 90 125 
+             M 60 65 L 90 125 L 120 65 
+             M 50 105 L 90 125 L 130 105 
+             M 65 140 L 90 125 L 115 140 
+             M 90 155 L 90 125" 
+          fill="none" stroke="#00FFCC" stroke-width="1.8" stroke-linejoin="round" filter="url(#glow)" />
+    
+    <!-- Cyber Visor (Glowing visor across the cat's eyes) -->
+    <polygon points="53,105 127,105 120,118 60,118" fill="#FF007F" fill-opacity="0.35" stroke="#FF007F" stroke-width="1" filter="url(#glow)" />
+    <!-- Visor Horizontal Scan Line -->
+    <line x1="53" y1="111" x2="127" y2="111" stroke="#FF007F" stroke-width="2.5" filter="url(#heavy-glow)" />
+
+    <!-- Ambient particles floating around the cyber cat -->
+    <circle cx="45" cy="80" r="1.5" fill="#00FFCC" opacity="0.6" filter="url(#glow)" />
+    <circle cx="135" cy="130" r="2" fill="#FF007F" opacity="0.7" filter="url(#glow)" />
+    <circle cx="70" cy="160" r="1" fill="#00FFCC" opacity="0.5" />
+  </g>
+
+  <!-- ==================== CENTER: FLOATING 3D HOLO-TERMINAL ==================== -->
+  <g class="holo-terminal-group">
+    <!-- Window shadow -->
+    <rect x="-10" y="10" width="450" height="185" rx="8" fill="#000000" opacity="0.3" />
+    
+    <!-- Window Body (Glassmorphism) -->
+    <rect x="0" y="0" width="450" height="185" rx="8" fill="#0B1320" fill-opacity="0.85" stroke="url(#neon-glow)" stroke-width="1.5" filter="url(#glow)" />
+    
+    <!-- Window Header Controls -->
+    <circle cx="20" cy="18" r="4.5" fill="#FF5F56" />
+    <circle cx="34" cy="18" r="4.5" fill="#FFBD2E" />
+    <circle cx="48" cy="18" r="4.5" fill="#27C93F" />
+    
+    <!-- Window Title -->
+    <text class="terminal-text" x="68" y="22" fill="#4B5563" font-weight="bold">FutureAlok1445@Mainframe</text>
+    
+    <line x1="0" y1="32" x2="450" y2="32" stroke="#1F2937" stroke-width="1" />
+    
+    <!-- Terminal Text Content (Explicitly spaced lines to prevent overlaps) -->
+    <g fill="#E5E7EB">
+      <!-- Line 1: User execution of file -->
+      <text class="terminal-text" x="18" y="52">
+        <tspan fill="#00F2FE">FutureAlok1445@system</tspan><tspan fill="#9CA3AF">:~$</tspan><tspan fill="#00FFCC"> ./launch_portfolio.sh</tspan>
+      </text>
+
+      <!-- Line 2: System confirmation -->
+      <text class="terminal-text" x="18" y="72">
+        <tspan fill="#00FFCC">[SUCCESS]</tspan> 3D Graphics Core &amp; WebGL Engine initialized.
+      </text>
+
+      <!-- Line 3: Loading portfolios -->
+      <text class="terminal-text" x="18" y="92" fill="#9CA3AF">
+        [INIT] Mounting assets: ELMS, FedShield, Deepscan
+      </text>
+
+      <!-- Line 4: System Key decrypt (101011011011) -->
+      <text class="terminal-text" x="18" y="112">
+        <tspan fill="#9CA3AF">[DATA] Decrypted Binary System Key: </tspan><tspan class="binary-code">101011011011</tspan>
+      </text>
+
+      <!-- Line 5: The Meow daemon status (Professional cat reference) -->
+      <text class="terminal-text" x="18" y="132">
+        <tspan fill="#00FFCC">[OK]</tspan> Background process <tspan fill="#00F2FE">meow.daemon</tspan> status: <tspan fill="#ADFF2F">Active &amp; Purring</tspan>
+      </text>
+
+      <!-- Line 6: Systems active -->
+      <text class="terminal-text" x="18" y="152" fill="#FFBD2E">
+        [STATUS] Portfolios synced. Ready for visitor interaction.
+      </text>
+
+      <!-- Line 7: Final prompt + cursor -->
+      <text class="terminal-text" x="18" y="172">
+        <tspan fill="#00F2FE">FutureAlok1445@system</tspan><tspan fill="#9CA3AF">:~$ </tspan>
+      </text>
+      <!-- Blinking cursor -->
+      <rect class="cursor" x="204" y="162" width="6.5" height="12" fill="#00FFCC" filter="url(#glow)" />
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT SIDE: 3D STACK & FLOATING CUBES ==================== -->
+  
+  <!-- 3D Database Cylinder (Right Side) -->
+  <g transform="translate(0, 0)">
+    <!-- Disk 3 (Bottom Layer - Purple) -->
+    <path d="M 645 170 V 190 A 35 14 0 0 0 715 190 V 170 Z" fill="#120A24" stroke="#7F00FF" stroke-width="1.2" />
+    <ellipse cx="680" cy="170" rx="35" ry="14" fill="#1E0F3D" stroke="#7F00FF" stroke-width="1.2" />
+    <circle cx="680" cy="181" r="2.5" fill="#7F00FF" class="db-light-3" />
+
+    <!-- Disk 2 (Middle Layer - Cyan) -->
+    <path d="M 645 135 V 155 A 35 14 0 0 0 715 155 V 135 Z" fill="#0A1D28" stroke="#00C9FF" stroke-width="1.2" />
+    <ellipse cx="680" cy="135" rx="35" ry="14" fill="#0F2D3D" stroke="#00C9FF" stroke-width="1.2" />
+    <circle cx="680" cy="146" r="2.5" fill="#00C9FF" class="db-light-2" />
+
+    <!-- Disk 1 (Top Layer - Green) -->
+    <path d="M 645 100 V 120 A 35 14 0 0 0 715 120 V 100 Z" fill="#08211D" stroke="#00FFCC" stroke-width="1.2" />
+    <ellipse cx="680" cy="100" rx="35" ry="14" fill="#0F3D35" stroke="#00FFCC" stroke-width="1.2" />
+    <circle cx="680" cy="111" r="2.5" fill="#00FFCC" class="db-light-1" />
+  </g>
+
+  <!-- Shadows for the 3D Cubes on the Grid Floor -->
+  <ellipse class="cube-shadow-1" cx="610" cy="245" rx="14" ry="5.5" fill="#000000" />
+  <ellipse class="cube-shadow-2" cx="745" cy="245" rx="12" ry="4.5" fill="#000000" />
+  <ellipse class="cube-shadow-3" cx="630" cy="245" rx="12" ry="4.5" fill="#000000" />
+
+  <!-- Floating 3D Cubes -->
+  <!-- Cube 1 (Left of Database - Blue/React) -->
+  <g class="cube-group-1">
+    <!-- Top Face -->
+    <polygon points="590,65 610,55 630,65 610,75" fill="#2563EB" stroke="#60A5FA" stroke-width="0.75" />
+    <!-- Left Face -->
+    <polygon points="590,65 610,75 610,93 590,83" fill="#1E3A8A" stroke="#60A5FA" stroke-width="0.75" />
+    <!-- Right Face -->
+    <polygon points="610,75 630,65 630,83 610,93" fill="#1D4ED8" stroke="#60A5FA" stroke-width="0.75" />
+  </g>
+
+  <!-- Cube 2 (Right/Back of Database - Green/Python) -->
+  <g class="cube-group-2">
+    <!-- Top Face -->
+    <polygon points="730,87 745,79 760,87 745,95" fill="#059669" stroke="#34D399" stroke-width="0.75" />
+    <!-- Left Face -->
+    <polygon points="730,87 745,95 745,110 730,102" fill="#065F46" stroke="#34D399" stroke-width="0.75" />
+    <!-- Right Face -->
+    <polygon points="745,95 760,87 760,102 745,110" fill="#047857" stroke="#34D399" stroke-width="0.75" />
+  </g>
+
+  <!-- Cube 3 (Foreground Right - Magenta) -->
+  <g class="cube-group-3">
+    <!-- Top Face -->
+    <polygon points="615,207 630,199 645,207 630,215" fill="#DB2777" stroke="#F472B6" stroke-width="0.75" />
+    <!-- Left Face -->
+    <polygon points="615,207 630,215 630,229 615,221" fill="#9D174D" stroke="#F472B6" stroke-width="0.75" />
+    <!-- Right Face -->
+    <polygon points="630,215 645,207 645,221 630,229" fill="#BE185D" stroke="#F472B6" stroke-width="0.75" />
+  </g>
+
+  <!-- ==================== METRICS & FOOTER STATUS BAR ==================== -->
+  
+  <!-- Horizontal divider line -->
+  <line x1="30" y1="275" x2="770" y2="275" stroke="#1F2937" stroke-width="1.2" />
+
+  <!-- Live metrics (Sleek developer look) -->
+  <g class="status-text" fill="#6B7280">
+    <text x="35" y="289">
+      CORE LOAD: <tspan fill="#00FFCC">98.4%</tspan>
+    </text>
+    
+    <text x="175" y="289">
+      LATENCY: <tspan fill="#00F2FE">14ms</tspan>
+    </text>
+
+    <text x="310" y="289">
+      HACKATHON DEPLOYMENTS: <tspan fill="#FF007F">ACTIVE (4x Winner)</tspan>
+    </text>
+
+    <text x="765" y="289" text-anchor="end">
+      © FUTUREALOK1445 // SECURE SYSTEM
+    </text>
+  </g>
+
+</svg>

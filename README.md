@@ -15,7 +15,7 @@
 </div>
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/main/assets/matrix-banner.svg" width="100%"/>
+<img src="assets/matrix-banner.svg" width="100%"/>
 </div>
 
 <br/>
