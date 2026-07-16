@@ -2,7 +2,7 @@
 
 <!-- Hero Banner (Cyberpunk Workstation + Neon Cat) -->
 <a href="https://github.com/FutureAlok1445">
-  <img src="assets/hero-banner.svg" width="100%" alt="Cyberpunk Workstation Banner" />
+  <img src="assets/hero-banner.svg?v=3" width="100%" alt="Cyberpunk Workstation Banner" />
 </a>
 
 <br/>
