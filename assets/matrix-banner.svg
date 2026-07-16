@@ -106,9 +106,8 @@
   <circle cx="400" cy="150" r="70" fill="#00F2FE" opacity="0.08" filter="url(#heavy-glow)" />
 
   <!-- ==================== ORBITS: BACK LAYER (Behind Cat) ==================== -->
-  <!-- Tilted Orbit 1 (Planetary Ring, Back Half) -->
-  <g transform="translate(400, 150) rotate(-15) skewX(30) translate(-400, -150)" opacity="0.3">
-    <!-- Back half of the circular orbit -->
+  <!-- Tilted Orbit 1 (Circular Orbit, Back Half) -->
+  <g transform="translate(400, 150) rotate(-15) skewX(30) translate(-400, -150)" opacity="0.2">
     <path d="M 220,150 A 180,180 0 0,1 580,150" fill="none" stroke="#00F2FE" stroke-width="1.5" stroke-dasharray="6 6" />
   </g>
 
@@ -150,7 +149,7 @@
 
   <!-- ==================== ORBITS: FRONT LAYER (In Front of Cat) ==================== -->
   
-  <!-- Tilted Orbit 1 (Planetary Ring, Front Half) -->
+  <!-- Tilted Orbit 1 (Front Half - Orbiting Tech Text Tags) -->
   <g transform="translate(400, 150) rotate(-15) skewX(30) translate(-400, -150)">
     <!-- Front half of the circular orbit -->
     <path d="M 580,150 A 180,180 0 0,1 220,150" fill="none" stroke="#00F2FE" stroke-width="1.5" stroke-dasharray="6 6" filter="url(#glow-cyan)" />
@@ -158,93 +157,88 @@
     <!-- Invisible full path for animation -->
     <path id="orbit-ring-1" d="M 220,150 A 180,180 0 1,0 580,150 A 180,180 0 1,0 220,150" fill="none" stroke="none" />
     
-    <!-- Orbiting Neon Particles -->
-    <circle r="4" fill="#00FFCC" filter="url(#heavy-glow)">
-      <animateMotion dur="5s" repeatCount="indefinite">
+    <!-- Orbiting Tech Tags instead of simple circles -->
+    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
+      React
+      <animateMotion dur="7s" repeatCount="indefinite">
         <mpath href="#orbit-ring-1" />
       </animateMotion>
-    </circle>
+    </text>
     
-    <circle r="3" fill="#FF007F" filter="url(#heavy-glow)">
-      <animateMotion dur="5s" begin="2.5s" repeatCount="indefinite">
+    <text fill="#FF007F" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-pink)" text-anchor="middle">
+      Node.js
+      <animateMotion dur="7s" begin="3.5s" repeatCount="indefinite">
         <mpath href="#orbit-ring-1" />
       </animateMotion>
-    </circle>
+    </text>
   </g>
 
-  <!-- Tilted Orbit 2 (Tilted Opposite Circular Orbit) -->
+  <!-- Tilted Orbit 2 (Tilted Opposite Circular Orbit - Orbiting Tech Text Tags) -->
   <g transform="translate(400, 150) rotate(20) skewX(-20) translate(-400, -150)">
-    <path id="orbit-ring-2" d="M 250,150 A 150,150 0 1,0 550,150 A 150,150 0 1,0 250,150" fill="none" stroke="#FF007F" stroke-width="1" stroke-dasharray="4 4" opacity="0.5" />
+    <path id="orbit-ring-2" d="M 250,150 A 150,150 0 1,0 550,150 A 150,150 0 1,0 250,150" fill="none" stroke="#FF007F" stroke-width="1" stroke-dasharray="4 4" opacity="0.4" />
     
-    <!-- Binary numbers orbiting along this ring -->
-    <text fill="#00FFCC" font-family="monospace" font-size="11" font-weight="bold" filter="url(#glow-cyan)">
-      1
-      <animateMotion dur="6s" repeatCount="indefinite">
+    <!-- Tech text tags orbiting along this ring -->
+    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
+      Python
+      <animateMotion dur="8.5s" repeatCount="indefinite">
         <mpath href="#orbit-ring-2" />
       </animateMotion>
     </text>
     
-    <text fill="#00F2FE" font-family="monospace" font-size="11" font-weight="bold" filter="url(#glow-cyan)">
-      0
-      <animateMotion dur="6s" begin="3s" repeatCount="indefinite">
+    <text fill="#00F2FE" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
+      Docker
+      <animateMotion dur="8.5s" begin="4.25s" repeatCount="indefinite">
         <mpath href="#orbit-ring-2" />
       </animateMotion>
     </text>
   </g>
 
   <!-- ==================== G-SHAPE ORBIT (Tilted, Looping Orbit) ==================== -->
-  <!-- Tilted group containing the G-Shape Path -->
+  <!-- Tilted group containing the G-Shape Path with Orbiting Tech Tags -->
   <g transform="translate(400, 150) skewX(-25) rotate(-10) translate(-400, -150)">
     <!-- Glowing G-Shape Path -->
     <path id="g-shape-orbit" d="M 490,75 A 110,110 0 1,0 510,150 H 440 V 175 H 410" fill="none" stroke="url(#neon-glow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#heavy-glow)" />
     
-    <!-- Orbiting Sparkle following the G-Shape -->
-    <circle r="4.5" fill="#FFFFFF" filter="url(#heavy-glow)">
-      <animateMotion dur="4.5s" repeatCount="indefinite">
-        <mpath href="#g-shape-orbit" />
-      </animateMotion>
-    </circle>
-
-    <!-- Floating Binary Numbers following the G-Shape -->
-    <text fill="#00FFCC" font-family="monospace" font-size="12" font-weight="bold" filter="url(#glow-cyan)">
-      1
-      <animateMotion dur="4.5s" begin="1.5s" repeatCount="indefinite">
+    <!-- Orbiting Tech Tags following the G-Shape -->
+    <text fill="#FFFFFF" font-family="monospace" font-size="11" font-weight="bold" filter="url(#heavy-glow)" text-anchor="middle">
+      ML
+      <animateMotion dur="5s" repeatCount="indefinite">
         <mpath href="#g-shape-orbit" />
       </animateMotion>
     </text>
     
-    <text fill="#FF007F" font-family="monospace" font-size="12" font-weight="bold" filter="url(#glow-pink)">
-      0
-      <animateMotion dur="4.5s" begin="3s" repeatCount="indefinite">
+    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
+      SQL
+      <animateMotion dur="5s" begin="2.5s" repeatCount="indefinite">
         <mpath href="#g-shape-orbit" />
       </animateMotion>
     </text>
   </g>
 
   <!-- ==================== HUD METRICS & DATA PANELS ==================== -->
-  <!-- Left Side HUD Data Panel -->
+  <!-- Left Side HUD Data Panel (Overloaded/Planet terms cleaned up) -->
   <g class="hud-text" fill="#6B7280" opacity="0.8">
-    <text x="35" y="65">SYS.TYPE: <tspan fill="#00F2FE">AURA.CORE_</tspan></text>
+    <text x="35" y="65">SYS: <tspan fill="#00F2FE">AURA_</tspan></text>
     <text x="35" y="85">STATUS: <tspan fill="#00FFCC">ONLINE</tspan></text>
-    <text x="35" y="105">COGNITION: <tspan fill="#FF007F">STABLE</tspan></text>
-    <text x="35" y="125" class="hud-blink">KEY_DECRYPT: <tspan fill="#00FFCC">101011011011</tspan></text>
+    <text x="35" y="105">SYS.ENV: <tspan fill="#FF007F">DEV</tspan></text>
+    <text x="35" y="125" class="hud-blink">KEY: <tspan fill="#00FFCC">101011011011</tspan></text>
   </g>
 
-  <!-- Right Side HUD Data Panel -->
+  <!-- Right Side HUD Data Panel (Cleaned up status terms) -->
   <g class="hud-text" fill="#6B7280" opacity="0.8" text-anchor="end">
-    <text x="765" y="65">MEOW.DAEMON: <tspan fill="#00FFCC">ACTIVE</tspan></text>
+    <text x="765" y="65">MEOW.DAEMON: <tspan fill="#00FFCC">RUNNING</tspan></text>
     <text x="765" y="85">ORBITAL.SPD: <tspan fill="#00F2FE">324 M/S</tspan></text>
     <text x="765" y="105">PERSPECTIVE: <tspan fill="#FF007F">3D.PROJ_</tspan></text>
-    <text x="765" y="125">SYS.SECURE: <tspan fill="#00FFCC">YES (100%)</tspan></text>
+    <text x="765" y="125">SYS.STATUS: <tspan fill="#00FFCC">NOMINAL</tspan></text>
   </g>
 
   <!-- ==================== BANNER FOOTER PANEL ==================== -->
   <line x1="30" y1="265" x2="770" y2="265" stroke="#1F2937" stroke-width="1" />
   
   <g class="hud-text" fill="#4B5563">
-    <text x="35" y="284">⚡ ENERGIZE: <tspan fill="#00FFCC">OVERLOADED</tspan></text>
-    <text x="210" y="284">🎯 OBJECTIVE: <tspan fill="#00F2FE">HACK THE PLANET</tspan></text>
-    <text x="440" y="284">🐾 ZOOMIES LEVEL: <tspan fill="#FF007F">CRITICAL (3 AM)</tspan></text>
+    <text x="35" y="284">⚡ POWER: <tspan fill="#00FFCC">NOMINAL</tspan></text>
+    <text x="210" y="284">🎯 FOCUS: <tspan fill="#00F2FE">FULL_STACK</tspan></text>
+    <text x="440" y="284">🐾 ZOOMIES: <tspan fill="#FF007F">3 AM</tspan></text>
     <text x="765" y="284" text-anchor="end">ALOK KUMAR SAHOO // 2026</text>
   </g>
 </svg>
