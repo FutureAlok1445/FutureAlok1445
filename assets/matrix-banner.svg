@@ -1,244 +1,140 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="100%" height="100%">
   <defs>
-    <!-- Dark Background Gradient -->
-    <linearGradient id="cyber-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#05070F" />
-      <stop offset="50%" stop-color="#0B0F19" />
-      <stop offset="100%" stop-color="#05070F" />
+    <!-- Deep Space/Tech Background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#02040A" />
+      <stop offset="50%" stop-color="#0A1128" />
+      <stop offset="100%" stop-color="#02040A" />
     </linearGradient>
 
-    <!-- Neon Glow Filters -->
-    <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
+    <!-- Professional Cyan Glow -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
 
-    <filter id="glow-pink" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
+    <!-- Professional Blue Glow -->
+    <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-
-    <filter id="heavy-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur1" />
-      <feGaussianBlur stdDeviation="3" result="blur2" />
-      <feMerge>
-        <feMergeNode in="blur1" />
-        <feMergeNode in="blur2" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
   </defs>
 
   <style>
-    /* Styling for HUD Text */
-    .hud-text {
-      font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco, Consolas, monospace;
-      font-size: 10px;
-      font-weight: bold;
-      letter-spacing: 1px;
+    /* Smooth 3D Perspective Rotation */
+    @keyframes orbit-1 {
+      0% { transform: rotateX(75deg) rotateZ(0deg); }
+      100% { transform: rotateX(75deg) rotateZ(360deg); }
     }
+    @keyframes orbit-2 {
+      0% { transform: rotateX(65deg) rotateY(15deg) rotateZ(360deg); }
+      100% { transform: rotateX(65deg) rotateY(15deg) rotateZ(0deg); }
+    }
+    @keyframes orbit-g {
+      0% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(0deg); }
+      100% { transform: rotateX(60deg) rotateY(-20deg) rotateZ(360deg); }
+    }
+    @keyframes core-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .ring-1 { transform-origin: 400px 125px; animation: orbit-1 12s linear infinite; }
+    .ring-2 { transform-origin: 400px 125px; animation: orbit-2 18s linear infinite; }
+    .ring-g { transform-origin: 400px 125px; animation: orbit-g 15s linear infinite; }
     
-    /* Key blinking for binary */
-    @keyframes blink {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-    .hud-blink {
-      animation: blink 2s infinite;
-    }
-
-    /* Head rotation/bobbing animation to look 3D */
-    @keyframes cat-bob {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-6px) rotate(1deg); }
-    }
-    .neon-cat {
-      animation: cat-bob 4s ease-in-out infinite;
-      transform-origin: 400px 150px;
-    }
-
-    /* Grid pulse */
-    @keyframes grid-pulse {
-      0%, 100% { opacity: 0.05; }
-      50% { opacity: 0.12; }
-    }
-    .cyber-grid {
-      animation: grid-pulse 4s ease-in-out infinite;
-    }
+    .core { transform-origin: 400px 125px; animation: core-pulse 4s ease-in-out infinite; }
+    .floating-group { animation: float 6s ease-in-out infinite; }
   </style>
 
   <!-- Background -->
-  <rect width="800" height="300" rx="12" fill="url(#cyber-bg)" stroke="#1F2937" stroke-width="1.5" />
+  <rect width="800" height="250" rx="8" fill="url(#bg)" stroke="#1E293B" stroke-width="1.5" />
 
-  <!-- Cyber Grid Pattern (Pulsing, Background) -->
-  <g class="cyber-grid" stroke="#00F2FE" stroke-width="0.5" opacity="0.08">
-    <!-- Grid floor perspective -->
+  <!-- Subtle Perspective Grid -->
+  <g stroke="#38BDF8" stroke-width="0.3" opacity="0.15">
+    <line x1="0" y1="180" x2="800" y2="180" />
     <line x1="0" y1="200" x2="800" y2="200" />
     <line x1="0" y1="225" x2="800" y2="225" />
     <line x1="0" y1="250" x2="800" y2="250" />
-    <line x1="0" y1="275" x2="800" y2="275" />
     
-    <line x1="400" y1="170" x2="-200" y2="300" />
-    <line x1="400" y1="170" x2="100" y2="300" />
-    <line x1="400" y1="170" x2="280" y2="300" />
-    <line x1="400" y1="170" x2="400" y2="300" />
-    <line x1="400" y1="170" x2="520" y2="300" />
-    <line x1="400" y1="170" x2="700" y2="300" />
-    <line x1="400" y1="170" x2="1000" y2="300" />
+    <line x1="400" y1="150" x2="-200" y2="250" />
+    <line x1="400" y1="150" x2="100" y2="250" />
+    <line x1="400" y1="150" x2="250" y2="250" />
+    <line x1="400" y1="150" x2="400" y2="250" />
+    <line x1="400" y1="150" x2="550" y2="250" />
+    <line x1="400" y1="150" x2="700" y2="250" />
+    <line x1="400" y1="150" x2="1000" y2="250" />
   </g>
 
-  <!-- HUD Corner Brackets (Vibrant Tech Look) -->
-  <g stroke="#00FFCC" stroke-width="2" fill="none" opacity="0.8">
-    <path d="M 25,45 V 25 H 45" />
-    <path d="M 775,45 V 25 H 755" />
-    <path d="M 25,255 V 275 H 45" />
-    <path d="M 775,255 V 275 H 755" />
+  <!-- Centerpiece: Professional 3D Geometric Construct -->
+  <g class="floating-group">
+    
+    <!-- Ambient Core Glow -->
+    <circle cx="400" cy="125" r="80" fill="#38BDF8" opacity="0.1" filter="url(#glow-blue)" />
+
+    <!-- 3D Orbiting Rings (Data Streams) -->
+    <!-- Ring 1 (Outer) -->
+    <g class="ring-1">
+      <circle cx="400" cy="125" r="160" fill="none" stroke="#0EA5E9" stroke-width="1" stroke-dasharray="4 8" opacity="0.5" />
+      <circle cx="560" cy="125" r="3" fill="#38BDF8" filter="url(#glow-cyan)" />
+      <circle cx="240" cy="125" r="2" fill="#38BDF8" />
+    </g>
+
+    <!-- Ring 2 (Inner Tilted) -->
+    <g class="ring-2">
+      <circle cx="400" cy="125" r="120" fill="none" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="15 5 2 5" opacity="0.7" />
+      <circle cx="400" cy="5" r="4" fill="#38BDF8" filter="url(#glow-cyan)" />
+    </g>
+
+    <!-- The "G-Shape" Orbit (As requested by user) -->
+    <g class="ring-g">
+      <path d="M 400,25 A 100,100 0 1,1 320,65" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#glow-cyan)" />
+      <!-- Data Node on G-Orbit -->
+      <circle cx="320" cy="65" r="4" fill="#FFFFFF" filter="url(#glow-blue)" />
+    </g>
+
+    <!-- Central Core: Sleek Abstract Geometry (representing a highly advanced node) -->
+    <g class="core">
+      <!-- Hexagonal Base -->
+      <polygon points="400,85 435,105 435,145 400,165 365,145 365,105" fill="#02040A" stroke="#38BDF8" stroke-width="2" filter="url(#glow-cyan)" />
+      
+      <!-- Inner Geometry (Pyramid/Cube projection) -->
+      <polygon points="400,85 435,145 365,145" fill="none" stroke="#60A5FA" stroke-width="1" opacity="0.7" />
+      <polygon points="400,165 435,105 365,105" fill="none" stroke="#60A5FA" stroke-width="1" opacity="0.7" />
+      <line x1="400" y1="85" x2="400" y2="165" stroke="#38BDF8" stroke-width="1.5" filter="url(#glow-cyan)" />
+      
+      <!-- Central Bright Node -->
+      <circle cx="400" cy="125" r="5" fill="#FFFFFF" filter="url(#glow-blue)" />
+    </g>
+
   </g>
 
-  <!-- Center Ambient Radial Glow (Behind the Neon Cat) -->
-  <circle cx="400" cy="150" r="110" fill="#7F00FF" opacity="0.12" filter="url(#heavy-glow)" />
-  <circle cx="400" cy="150" r="70" fill="#00F2FE" opacity="0.08" filter="url(#heavy-glow)" />
-
-  <!-- ==================== ORBITS: BACK LAYER (Behind Cat) ==================== -->
-  <!-- Tilted Orbit 1 (Circular Orbit, Back Half) -->
-  <g transform="translate(400, 150) rotate(-15) skewX(30) translate(-400, -150)" opacity="0.2">
-    <path d="M 220,150 A 180,180 0 0,1 580,150" fill="none" stroke="#00F2FE" stroke-width="1.5" stroke-dasharray="6 6" />
+  <!-- Left Side: Professional HUD Data Metrics -->
+  <g font-family="monospace" font-size="10" fill="#94A3B8" opacity="0.9">
+    <text x="40" y="60">SYSTEM ARCHITECTURE</text>
+    <line x1="40" y1="65" x2="160" y2="65" stroke="#38BDF8" stroke-width="1" opacity="0.5" />
+    <text x="40" y="85">LATENCY   : <tspan fill="#38BDF8">12ms</tspan></text>
+    <text x="40" y="105">NODES     : <tspan fill="#38BDF8">ACTIVE</tspan></text>
+    <text x="40" y="125">ROUTING   : <tspan fill="#38BDF8">OPTIMAL</tspan></text>
   </g>
 
-  <!-- ==================== CENTERPIECE: 3D NEON CAT ==================== -->
-  <g class="neon-cat">
-    <!-- Outer geometric head shape -->
-    <path d="M 350,110 Q 315,150 350,190 Q 400,225 450,190 Q 485,150 450,110 Q 400,105 350,110 Z" 
-          fill="#060913" fill-opacity="0.85" stroke="#00F2FE" stroke-width="2.5" stroke-linejoin="round" filter="url(#glow-cyan)" />
-
-    <!-- Left Ear (Outer & Inner) -->
-    <path d="M 350,110 L 325,55 L 380,95 Z" fill="#060913" stroke="#00F2FE" stroke-width="2" stroke-linejoin="round" filter="url(#glow-cyan)" />
-    <path d="M 352,103 L 334,67 L 374,92 Z" fill="none" stroke="#FF007F" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow-pink)" />
-    
-    <!-- Right Ear (Outer & Inner) -->
-    <path d="M 450,110 L 475,55 L 420,95 Z" fill="#060913" stroke="#00F2FE" stroke-width="2" stroke-linejoin="round" filter="url(#glow-cyan)" />
-    <path d="M 448,103 L 466,67 L 426,92 Z" fill="none" stroke="#FF007F" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow-pink)" />
-
-    <!-- Head Stripes (Sleek tech lines) -->
-    <path d="M 394,111 V 118 M 400,110 V 119 M 406,111 V 118" fill="none" stroke="#FF007F" stroke-width="1.5" stroke-linecap="round" />
-
-    <!-- Glowing Cyber Visor -->
-    <polygon points="342,120 458,120 448,142 352,142" fill="#FF007F" fill-opacity="0.25" stroke="#FF007F" stroke-width="1.8" filter="url(#glow-pink)" />
-    <!-- Visor Scanline -->
-    <line x1="342" y1="126" x2="458" y2="126" stroke="#FF007F" stroke-width="3" filter="url(#heavy-glow)" />
-    <!-- Visor HUD Indicators -->
-    <path d="M 347,123 H 351 V 127 M 453,123 H 449 V 127" fill="none" stroke="#00FFCC" stroke-width="1" />
-    <circle cx="400" cy="133" r="1.5" fill="#00FFCC" />
-
-    <!-- Nose (Neon Triangle) -->
-    <polygon points="397,149 403,149 400,152" fill="#FF007F" filter="url(#glow-pink)" />
-    
-    <!-- Cute Geometric Mouth -->
-    <path d="M 391,157 Q 396,160 400,157 Q 404,160 409,157" fill="none" stroke="#00FFCC" stroke-width="2" stroke-linecap="round" />
-
-    <!-- Whiskers (Neon vectors) -->
-    <path d="M 330,165 L 295,163 M 332,172 L 297,175" fill="none" stroke="#00FFCC" stroke-width="1.5" stroke-linecap="round" filter="url(#glow-cyan)" />
-    <path d="M 470,165 L 505,163 M 468,172 L 503,175" fill="none" stroke="#00FFCC" stroke-width="1.5" stroke-linecap="round" filter="url(#glow-cyan)" />
+  <!-- Right Side: Professional HUD Data Metrics -->
+  <g font-family="monospace" font-size="10" fill="#94A3B8" opacity="0.9" text-anchor="end">
+    <text x="760" y="60">NEURAL ENGINE</text>
+    <line x1="640" y1="65" x2="760" y2="65" stroke="#38BDF8" stroke-width="1" opacity="0.5" />
+    <text x="760" y="85">PREDICTION : <tspan fill="#38BDF8">94.2%</tspan></text>
+    <text x="760" y="105">INFERENCE  : <tspan fill="#38BDF8">ONLINE</tspan></text>
+    <text x="760" y="125">MODEL      : <tspan fill="#38BDF8">SYNCED</tspan></text>
   </g>
 
-  <!-- ==================== ORBITS: FRONT LAYER (In Front of Cat) ==================== -->
-  
-  <!-- Tilted Orbit 1 (Front Half - Orbiting Tech Text Tags) -->
-  <g transform="translate(400, 150) rotate(-15) skewX(30) translate(-400, -150)">
-    <!-- Front half of the circular orbit -->
-    <path d="M 580,150 A 180,180 0 0,1 220,150" fill="none" stroke="#00F2FE" stroke-width="1.5" stroke-dasharray="6 6" filter="url(#glow-cyan)" />
-    
-    <!-- Invisible full path for animation -->
-    <path id="orbit-ring-1" d="M 220,150 A 180,180 0 1,0 580,150 A 180,180 0 1,0 220,150" fill="none" stroke="none" />
-    
-    <!-- Orbiting Tech Tags instead of simple circles -->
-    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
-      React
-      <animateMotion dur="7s" repeatCount="indefinite">
-        <mpath href="#orbit-ring-1" />
-      </animateMotion>
-    </text>
-    
-    <text fill="#FF007F" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-pink)" text-anchor="middle">
-      Node.js
-      <animateMotion dur="7s" begin="3.5s" repeatCount="indefinite">
-        <mpath href="#orbit-ring-1" />
-      </animateMotion>
-    </text>
-  </g>
-
-  <!-- Tilted Orbit 2 (Tilted Opposite Circular Orbit - Orbiting Tech Text Tags) -->
-  <g transform="translate(400, 150) rotate(20) skewX(-20) translate(-400, -150)">
-    <path id="orbit-ring-2" d="M 250,150 A 150,150 0 1,0 550,150 A 150,150 0 1,0 250,150" fill="none" stroke="#FF007F" stroke-width="1" stroke-dasharray="4 4" opacity="0.4" />
-    
-    <!-- Tech text tags orbiting along this ring -->
-    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
-      Python
-      <animateMotion dur="8.5s" repeatCount="indefinite">
-        <mpath href="#orbit-ring-2" />
-      </animateMotion>
-    </text>
-    
-    <text fill="#00F2FE" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
-      Docker
-      <animateMotion dur="8.5s" begin="4.25s" repeatCount="indefinite">
-        <mpath href="#orbit-ring-2" />
-      </animateMotion>
-    </text>
-  </g>
-
-  <!-- ==================== G-SHAPE ORBIT (Tilted, Looping Orbit) ==================== -->
-  <!-- Tilted group containing the G-Shape Path with Orbiting Tech Tags -->
-  <g transform="translate(400, 150) skewX(-25) rotate(-10) translate(-400, -150)">
-    <!-- Glowing G-Shape Path -->
-    <path id="g-shape-orbit" d="M 490,75 A 110,110 0 1,0 510,150 H 440 V 175 H 410" fill="none" stroke="url(#neon-glow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#heavy-glow)" />
-    
-    <!-- Orbiting Tech Tags following the G-Shape -->
-    <text fill="#FFFFFF" font-family="monospace" font-size="11" font-weight="bold" filter="url(#heavy-glow)" text-anchor="middle">
-      ML
-      <animateMotion dur="5s" repeatCount="indefinite">
-        <mpath href="#g-shape-orbit" />
-      </animateMotion>
-    </text>
-    
-    <text fill="#00FFCC" font-family="monospace" font-size="10" font-weight="bold" filter="url(#glow-cyan)" text-anchor="middle">
-      SQL
-      <animateMotion dur="5s" begin="2.5s" repeatCount="indefinite">
-        <mpath href="#g-shape-orbit" />
-      </animateMotion>
-    </text>
-  </g>
-
-  <!-- ==================== HUD METRICS & DATA PANELS ==================== -->
-  <!-- Left Side HUD Data Panel (Overloaded/Planet terms cleaned up) -->
-  <g class="hud-text" fill="#6B7280" opacity="0.8">
-    <text x="35" y="65">SYS: <tspan fill="#00F2FE">AURA_</tspan></text>
-    <text x="35" y="85">STATUS: <tspan fill="#00FFCC">ONLINE</tspan></text>
-    <text x="35" y="105">SYS.ENV: <tspan fill="#FF007F">DEV</tspan></text>
-    <text x="35" y="125" class="hud-blink">KEY: <tspan fill="#00FFCC">101011011011</tspan></text>
-  </g>
-
-  <!-- Right Side HUD Data Panel (Cleaned up status terms) -->
-  <g class="hud-text" fill="#6B7280" opacity="0.8" text-anchor="end">
-    <text x="765" y="65">MEOW.DAEMON: <tspan fill="#00FFCC">RUNNING</tspan></text>
-    <text x="765" y="85">ORBITAL.SPD: <tspan fill="#00F2FE">324 M/S</tspan></text>
-    <text x="765" y="105">PERSPECTIVE: <tspan fill="#FF007F">3D.PROJ_</tspan></text>
-    <text x="765" y="125">SYS.STATUS: <tspan fill="#00FFCC">NOMINAL</tspan></text>
-  </g>
-
-  <!-- ==================== BANNER FOOTER PANEL ==================== -->
-  <line x1="30" y1="265" x2="770" y2="265" stroke="#1F2937" stroke-width="1" />
-  
-  <g class="hud-text" fill="#4B5563">
-    <text x="35" y="284">⚡ POWER: <tspan fill="#00FFCC">NOMINAL</tspan></text>
-    <text x="210" y="284">🎯 FOCUS: <tspan fill="#00F2FE">FULL_STACK</tspan></text>
-    <text x="440" y="284">🐾 ZOOMIES: <tspan fill="#FF007F">3 AM</tspan></text>
-    <text x="765" y="284" text-anchor="end">ALOK KUMAR SAHOO // 2026</text>
-  </g>
 </svg>
