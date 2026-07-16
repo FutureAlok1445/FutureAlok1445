@@ -81,40 +81,9 @@
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=FutureAlok1445&amp;bg_color=02040A&amp;title_color=00F2FE&amp;currStreakLabel=FF007F&amp;fire=FF007F&amp;sideNums=94A3B8&amp;sideLabels=94A3B8&amp;dates=94A3B8&amp;border=00F2FE&amp;borderRadius=8" alt="GitHub Streak" />
 
-<br/>
-<br/>
-
-<!-- Contribution Snake -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake.svg">
-  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake.svg" width="100%">
-</picture>
 
 </div>
 
----
-
-## 🚀 _`core.execute("FEATURED_PROJECTS")`_
-
-<table border="0">
-  <tr>
-    <td width="50%" valign="top">
-      <h3 align="center"><font color="#00F2FE">📦 ELMS (Enterprise Logistics)</font></h3>
-      <p align="center"><img src="https://img.shields.io/badge/Status-Deployed-00F2FE?style=flat-square" /> <img src="https://img.shields.io/badge/Stack-React%20%7C%20Node%20%7C%20FastAPI-0B0F19?style=flat-square&amp;labelColor=FF007F" /></p>
-      <p><font color="#94A3B8">A solo-developed enterprise-grade distributed microservices platform for real-time logistics tracking and ML-based volume forecasting. Features Redis &amp; BullMQ distributed queuing.</font></p>
-      <p align="center"><a href="https://github.com/FutureAlok1445/Logistic-Module"><b>[ SOURCE CODE ]</b></a></p>
-    </td>
-    <td width="50%" valign="top">
-      <h3 align="center"><font color="#FF007F">🛡️ FedShield</font></h3>
-      <p align="center"><img src="https://img.shields.io/badge/Status-Research-FF007F?style=flat-square" /> <img src="https://img.shields.io/badge/Stack-Python%20%7C%20LightGBM%20%7C%20Flower-0B0F19?style=flat-square&amp;labelColor=00F2FE" /></p>
-      <p><font color="#94A3B8">A federated learning model utilizing differential privacy to detect credit card fraud across decentralized institutions without sharing raw transactional data. Achieved 94.2% ROC-AUC.</font></p>
-      <p align="center"><a href="https://github.com/FutureAlok1445/FedShield"><b>[ SOURCE CODE ]</b></a></p>
-    </td>
-  </tr>
-</table>
-
----
 
 ## 🏆 _`system.achievements()`_
 
@@ -123,17 +92,6 @@
 - 🥇 **Winner:** IEEE Hackathon (Decentralized Verification Ledger).
 - 📜 **Certified:** Google Cloud (GCP) Generative AI Fundamentals.
 
----
-
-## 🧠 _`thread.spawn("LEARNING_ROUTINE")`_
-
-```bash
-[========================>  ] 85%  Advanced Three.js / WebGL Rendering
-[=================>         ] 60%  Kubernetes Orchestration & Helm Charts
-[========>                  ] 30%  Rust for High-Performance Systems
-```
-
----
 
 <div align="center">
 
