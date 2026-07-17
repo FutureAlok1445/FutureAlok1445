@@ -97,16 +97,13 @@
 
 ---
 
-## 🏆 _`github.trophies()`_
-
-<div align="center">
+## 🐍 _`github.contribution_snake()`_
 
 <img
-  src="https://github-profile-trophy.vercel.app/?username=FutureAlok1445&theme=algolia&no-frame=true&no-bg=true&margin-w=15&margin-h=15&column=4"
-  alt="GitHub Trophies"
+  src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg"
+  alt="Contribution Snake"
+  width="100%"
 />
-
-</div>
 
 ## 🔮 _`print(daily_quote)`_
 
