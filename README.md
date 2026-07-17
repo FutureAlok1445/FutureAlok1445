@@ -97,14 +97,6 @@
 
 ---
 
-## 🏆 _`github.trophies()`_
-
-<div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=FutureAlok1445&theme=radical&no-frame=true&no-bg=true&margin-w=15&margin-h=15&column=7" alt="GitHub Trophies" />
-</div>
-
----
-
 ## 🐍 _`github.contribution_snake()`_
 
 <img
