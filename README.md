@@ -95,6 +95,19 @@
 
 <div align="center">
 
+---
+
+## 🏆 _`github.trophies()`_
+
+<div align="center">
+
+<img
+  src="https://github-profile-trophy.vercel.app/?username=FutureAlok1445&theme=algolia&no-frame=true&no-bg=true&margin-w=15&margin-h=15&column=4"
+  alt="GitHub Trophies"
+/>
+
+</div>
+
 ## 🔮 _`print(daily_quote)`_
 
 <img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&amp;weight=500&amp;size=16&amp;pause=5000&amp;color=FF007F&amp;center=true&amp;vCenter=true&amp;width=800&amp;height=40&amp;lines=%22Talk+is+cheap.+Show+me+the+code.%22+-+Linus+Torvalds;%22Any+fool+can+write+code+that+a+computer+can+understand.%22;%22Good+programmers+write+code+that+humans+can+understand.%22" alt="Quote" />
