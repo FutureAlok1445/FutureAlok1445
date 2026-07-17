@@ -93,17 +93,6 @@
 - 📜 **Certified:** Google Cloud (GCP) Generative AI Fundamentals.
 
 
-<div align="center">
-
----
-
-## 🐍 _`github.contribution_snake()`_
-
-<img
-  src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg"
-  alt="Contribution Snake"
-  width="100%"
-/>
 
 ## 🔮 _`print(daily_quote)`_
 
