@@ -30,10 +30,12 @@ jobs:
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-            dist/github-contribution-grid-snake-neon.svg?color_snake=#00F2FE&color_dots=#02040A,#0B0F19,#161B22,#00F2FE,#7F00FF,#FF007F
+            dist/github-contribution-grid-snake-neon.svg?color_snake=#00F2FE&color_dots=#0B0F19,#161B22,#00F2FE,#7F00FF,#FF007F
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish snake to output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
           build_dir: dist

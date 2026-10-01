@@ -1,15 +1,18 @@
 <div align="center">
 
+<!-- Hero Banner -->
 <a href="https://github.com/FutureAlok1445">
   <img src="assets/hero-banner.svg?v=3" width="100%" alt="Alok Kumar Sahoo - Developer Banner" />
 </a>
 
 <br/>
 
+<!-- Dynamic Title Typing Animation -->
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=22&pause=1000&color=00F2FE&center=true&vCenter=true&width=850&height=55&lines=Software+Engineer;Full-Stack+Developer;AI+%26+ML+Enthusiast;Cloud+%26+DevOps+Explorer;Open+Source+Contributor;SIH+2025+National+Finalist;Building+Ideas+Into+Real+Products" alt="Typing Animation" />
 
 <br/>
 
+<!-- Real-time Profile Counters -->
 <a href="https://github.com/FutureAlok1445">
   <img src="https://komarev.com/ghpvc/?username=FutureAlok1445&label=PROFILE+VIEWS&color=00F2FE&style=for-the-badge" alt="Profile Views" />
 </a>
@@ -19,6 +22,7 @@
 
 <br/><br/>
 
+<!-- Social & Contact Badges -->
 <a href="https://linkedin.com/in/alok-kumar-sahoo1445">
   <img src="https://img.shields.io/badge/LinkedIn-02040A?style=for-the-badge&logo=linkedin&logoColor=00F2FE&labelColor=02040A&color=0B0F19" alt="LinkedIn"/>
 </a>
@@ -40,23 +44,21 @@
 </div>
 
 ```yaml
-name: Alok Kumar Sahoo
-role: Software Engineer & Full-Stack Developer
-education: B.E. Information Technology
-college: A.P. Shah Institute of Technology
-graduation: 2027
+identity:
+  name: Alok Kumar Sahoo
+  role: Software Engineer & Full-Stack Systems Architect
+  education: B.E. in Information Technology (2023 – 2027)
+  institution: A.P. Shah Institute of Technology
 
-currently_exploring:
-  - Full-Stack Engineering
-  - Artificial Intelligence
-  - Machine Learning
-  - Cloud Computing
-  - DevOps
-  - Distributed Systems
+core_competencies:
+  - High-Throughput Full-Stack Web Systems
+  - Applied Artificial Intelligence & Machine Learning
+  - Distributed Backend Microservices & Asynchronous Queues
+  - Cloud Infrastructure, Containerization & CI/CD Pipelines
 
-mission: >
-  Build scalable, intelligent and beautifully engineered
-  software that solves real-world problems.
+mission_directive: >
+  Architect scalable, intelligent, and beautifully crafted
+  software solutions that bridge user experience with resilient backends.
 ```
 
 <br/>
@@ -73,7 +75,7 @@ mission: >
 
 <div align="center">
 
-### `Frontend / UI`
+### `Frontend / UI & Design`
 
 <img src="https://skillicons.dev/icons?i=react,nextjs,js,ts,tailwind,html,css,vite,figma&theme=dark" alt="Frontend Technologies"/>
 
@@ -103,7 +105,34 @@ mission: >
 
 ## `> achievements.unlock()`
 
-<img src="https://github-profile-trophy.vercel.app/?username=FutureAlok1445&theme=algolia&no-frame=true&no-bg=true&margin-w=8&margin-h=8&column=7" width="100%" alt="GitHub Trophies"/>
+<table border="0" width="100%">
+  <tr>
+    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #00F2FE; border-radius: 8px; padding: 14px;">
+      <font size="5">🏅</font><br/>
+      <font color="#00F2FE"><b>SIH 2025</b></font><br/>
+      <font size="2" color="#94A3B8">National Finalist</font><br/>
+      <font size="1" color="#FF007F">Project AURA</font>
+    </td>
+    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #7F00FF; border-radius: 8px; padding: 14px;">
+      <font size="5">🥇</font><br/>
+      <font color="#7F00FF"><b>OpsStorm</b></font><br/>
+      <font size="2" color="#94A3B8">1st Place Winner</font><br/>
+      <font size="1" color="#00F2FE">Container Orchestration</font>
+    </td>
+    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #FF007F; border-radius: 8px; padding: 14px;">
+      <font size="5">🥇</font><br/>
+      <font color="#FF007F"><b>IEEE Hackathon</b></font><br/>
+      <font size="2" color="#94A3B8">1st Place Winner</font><br/>
+      <font size="1" color="#7F00FF">Decentralized Ledger</font>
+    </td>
+    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #00F2FE; border-radius: 8px; padding: 14px;">
+      <font size="5">☁️</font><br/>
+      <font color="#00F2FE"><b>Google Cloud</b></font><br/>
+      <font size="2" color="#94A3B8">GenAI Certified</font><br/>
+      <font size="1" color="#FF007F">Cloud Fundamentals</font>
+    </td>
+  </tr>
+</table>
 
 </div>
 
@@ -111,18 +140,21 @@ mission: >
 
 ## `> projects --featured`
 
-<table>
+<table border="0" width="100%">
 <tr>
 <td width="50%" valign="top">
 
 ### 🛡️ FedShield
 
-Federated-learning focused security project exploring intelligent and privacy-conscious distributed systems.
+Federated-learning security project exploring intelligent, privacy-preserving distributed systems with differential privacy.
 
-**Focus:** AI · Security · Federated Learning
+**Focus:** AI · Security · Federated Learning  
+**Stack:** Python · LightGBM · Flower · Scikit-Learn
+
+<br/>
 
 <a href="https://github.com/FutureAlok1445/FedShield">
-  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" />
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="FedShield Repo" />
 </a>
 
 </td>
@@ -131,30 +163,51 @@ Federated-learning focused security project exploring intelligent and privacy-co
 
 ### ⚡ SpeedoType
 
-A typing-focused web application built to improve speed, accuracy and interactive frontend development skills.
+Interactive typing enhancement web application built for measuring typing velocity, accuracy metrics, and precision analytics.
 
-**Focus:** Web Development · JavaScript · UI
+**Focus:** Web Performance · UI/UX · JavaScript  
+**Stack:** React · Vite · Tailwind CSS · TypeScript
+
+<br/>
 
 <a href="https://github.com/FutureAlok1445/Speedotype">
-  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-FF007F?style=for-the-badge&logo=github&logoColor=ffffff" />
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-FF007F?style=for-the-badge&logo=github&logoColor=ffffff" alt="SpeedoType Repo" />
 </a>
 
 </td>
 </tr>
 
 <tr>
-<td colspan="2" valign="top">
+<td width="50%" valign="top">
 
 ### 💸 Reimbursement Automation System
 
-Role-based university reimbursement platform covering submission, verification, multi-level approval, analytics and payment workflows.
+Comprehensive role-based university reimbursement platform featuring submission, verification, multi-level hierarchy approvals, and payout tracking.
 
-**Roles:** Student · Faculty · Coordinator · HOD · Principal · Accounts
-
+**Roles:** Student · Faculty · Coordinator · HOD · Principal · Accounts  
 **Stack:** React · Node.js · Express · PostgreSQL
 
+<br/>
+
 <a href="https://github.com/Aspira-2k25/reimbursement-automation-system-new">
-  <img src="https://img.shields.io/badge/VIEW_PROJECT-7F00FF?style=for-the-badge&logo=github&logoColor=ffffff" />
+  <img src="https://img.shields.io/badge/VIEW_PROJECT-7F00FF?style=for-the-badge&logo=github&logoColor=ffffff" alt="Reimbursement Project" />
+</a>
+
+</td>
+
+<td width="50%" valign="top">
+
+### 📦 ELMS (Enterprise Logistics)
+
+High-throughput distributed microservice architecture for supply chain route simulation, inventory demand forecasting, and queuing.
+
+**Features:** BullMQ Async Jobs · Redis Caching · ML Volume Predictor  
+**Stack:** React · Node.js · FastAPI · Redis · PostgreSQL
+
+<br/>
+
+<a href="https://github.com/FutureAlok1445/Logistic-Module">
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="Logistics Module Repo" />
 </a>
 
 </td>
@@ -167,23 +220,20 @@ Role-based university reimbursement platform covering submission, verification, 
 
 ## `> github.metrics()`
 
-<img width="49%" src="https://github-readme-stats.vercel.app/api?username=FutureAlok1445&show_icons=true&hide_border=true&bg_color=00000000&title_color=00F2FE&text_color=8B949E&icon_color=FF007F&ring_color=7F00FF" alt="GitHub Stats"/>
+<table border="0" width="100%">
+  <tr>
+    <td align="center" width="50%">
+      <img width="100%" src="https://github-readme-stats-eight-theta.vercel.app/api?username=FutureAlok1445&show_icons=true&hide_border=true&bg_color=00000000&title_color=00F2FE&text_color=8B949E&icon_color=FF007F&ring_color=7F00FF" alt="GitHub Stats"/>
+    </td>
+    <td align="center" width="50%">
+      <img width="100%" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=FutureAlok1445&layout=compact&hide_border=true&bg_color=00000000&title_color=00F2FE&text_color=8B949E" alt="Top Languages"/>
+    </td>
+  </tr>
+</table>
 
-<img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=FutureAlok1445&layout=compact&hide_border=true&bg_color=00000000&title_color=00F2FE&text_color=8B949E" alt="Top Languages"/>
+<br/>
 
-<br/><br/>
-
-<img width="70%" src="https://streak-stats.demolab.com?user=FutureAlok1445&theme=transparent&hide_border=true&background=00000000&stroke=00F2FE&ring=7F00FF&fire=FF007F&currStreakNum=00F2FE&sideNums=FFFFFF&currStreakLabel=FF007F&sideLabels=8B949E&dates=8B949E" alt="GitHub Streak"/>
-
-</div>
-
----
-
-<div align="center">
-
-## `> contribution.activity --visualize`
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=FutureAlok1445&bg_color=00000000&color=00F2FE&line=7F00FF&point=FF007F&area=true&hide_border=true" width="100%" alt="Contribution Activity Graph"/>
+<img width="80%" src="https://streak-stats.demolab.com?user=FutureAlok1445&theme=transparent&hide_border=true&background=00000000&stroke=00F2FE&ring=7F00FF&fire=FF007F&currStreakNum=00F2FE&sideNums=FFFFFF&currStreakLabel=FF007F&sideLabels=8B949E&dates=8B949E" alt="GitHub Streak"/>
 
 </div>
 
@@ -196,7 +246,7 @@ Role-based university reimbursement platform covering submission, verification, 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake.svg">
-  <img alt="GitHub Contribution Snake" src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg">
+  <img alt="GitHub Contribution Snake Animation" src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg" width="100%">
 </picture>
 
 </div>
@@ -205,12 +255,12 @@ Role-based university reimbursement platform covering submission, verification, 
 
 ## `> system.highlights()`
 
-- 🏅 **National Finalist — Smart India Hackathon 2025**
-- 🥇 **Winner — OpsStorm Hackathon**
-- 🥇 **Winner — IEEE Hackathon**
-- ☁️ **Google Cloud Generative AI Fundamentals**
-- 🧠 Building projects across **Full-Stack Development, AI/ML, Cloud and DevOps**
-- ⚙️ Interested in designing systems that are **scalable, secure and actually useful**
+- 🏅 **National Finalist — Smart India Hackathon (SIH) 2025** (Project AURA - Decentralized Governance).
+- 🥇 **Winner — OpsStorm Hackathon** (Automated Container Orchestration & Self-Healing Services).
+- 🥇 **Winner — IEEE Hackathon** (Decentralized Verification Ledger).
+- ☁️ **Certified — Google Cloud Platform (GCP)** Generative AI Fundamentals.
+- 🧠 Active Developer across **Distributed Backend Architectures, ML Pipelines & Frontend Engineering**.
+- ⚙️ Focused on engineering systems that are **fault-tolerant, latency-optimized, and secure**.
 
 ---
 
