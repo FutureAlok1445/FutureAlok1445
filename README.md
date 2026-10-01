@@ -51,14 +51,14 @@ identity:
   institution: A.P. Shah Institute of Technology
 
 core_competencies:
-  - High-Throughput Full-Stack Web Systems
-  - Applied Artificial Intelligence & Machine Learning
+  - High-Throughput Full-Stack Web Applications
+  - Applied AI & Explainable Machine Learning
   - Distributed Backend Microservices & Asynchronous Queues
   - Cloud Infrastructure, Containerization & CI/CD Pipelines
 
 mission_directive: >
-  Architect scalable, intelligent, and beautifully crafted
-  software solutions that bridge user experience with resilient backends.
+  Architect scalable, intelligent, and beautifully engineered
+  software systems that bridge intuitive UI/UX with resilient backend pipelines.
 ```
 
 <br/>
@@ -101,77 +101,42 @@ mission_directive: >
 
 ---
 
-<div align="center">
-
-## `> achievements.unlock()`
-
-<table border="0" width="100%">
-  <tr>
-    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #00F2FE; border-radius: 8px; padding: 14px;">
-      <font size="5">🏅</font><br/>
-      <font color="#00F2FE"><b>SIH 2025</b></font><br/>
-      <font size="2" color="#94A3B8">National Finalist</font><br/>
-      <font size="1" color="#FF007F">Project AURA</font>
-    </td>
-    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #7F00FF; border-radius: 8px; padding: 14px;">
-      <font size="5">🥇</font><br/>
-      <font color="#7F00FF"><b>OpsStorm</b></font><br/>
-      <font size="2" color="#94A3B8">1st Place Winner</font><br/>
-      <font size="1" color="#00F2FE">Container Orchestration</font>
-    </td>
-    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #FF007F; border-radius: 8px; padding: 14px;">
-      <font size="5">🥇</font><br/>
-      <font color="#FF007F"><b>IEEE Hackathon</b></font><br/>
-      <font size="2" color="#94A3B8">1st Place Winner</font><br/>
-      <font size="1" color="#7F00FF">Decentralized Ledger</font>
-    </td>
-    <td align="center" width="25%" bgcolor="#0B0F19" style="border: 1px solid #00F2FE; border-radius: 8px; padding: 14px;">
-      <font size="5">☁️</font><br/>
-      <font color="#00F2FE"><b>Google Cloud</b></font><br/>
-      <font size="2" color="#94A3B8">GenAI Certified</font><br/>
-      <font size="1" color="#FF007F">Cloud Fundamentals</font>
-    </td>
-  </tr>
-</table>
-
-</div>
-
----
-
 ## `> projects --featured`
 
 <table border="0" width="100%">
 <tr>
 <td width="50%" valign="top">
 
-### 🛡️ FedShield
+### 🛡️ TrustNet-AI
 
-Federated-learning security project exploring intelligent, privacy-preserving distributed systems with differential privacy.
+An explainable digital-deception and media verification platform targeting synthetic faces and manipulated images.
 
-**Focus:** AI · Security · Federated Learning  
-**Stack:** Python · LightGBM · Flower · Scikit-Learn
+- **Problem:** Black-box AI detectors provide no inspectable evidence for human analysts.
+- **Approach:** Combines Vision Transformers (ViT) and EfficientNet spatial backbones with 2D FFT, Error Level Analysis (ELA), and sensor-noise forensics with Grad-CAM visual heatmaps.
+- **Stack:** `Python` • `FastAPI` • `React` • `PyTorch` • `ViT` • `OpenCV` • `Docker`
 
 <br/>
 
-<a href="https://github.com/FutureAlok1445/FedShield">
-  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="FedShield Repo" />
+<a href="https://github.com/FutureAlok1445/Deepscan">
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="TrustNet Repo" />
 </a>
 
 </td>
 
 <td width="50%" valign="top">
 
-### ⚡ SpeedoType
+### 💸 Reimbursement Automation System
 
-Interactive typing enhancement web application built for measuring typing velocity, accuracy metrics, and precision analytics.
+An institutional multi-role workflow platform streamlining academic expense submissions, verification, and disbursement.
 
-**Focus:** Web Performance · UI/UX · JavaScript  
-**Stack:** React · Vite · Tailwind CSS · TypeScript
+- **Problem:** Manual paper-based reimbursement queues suffer from verification delays and lack of audit trails.
+- **Approach:** Full-stack role-based workflow across 5 tiers (Student/Faculty → Coordinator → HOD → Principal → Accounts) with automated approvals.
+- **Stack:** `React` • `Vite` • `Node.js` • `Express.js` • `PostgreSQL` • `REST APIs`
 
 <br/>
 
-<a href="https://github.com/FutureAlok1445/Speedotype">
-  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-FF007F?style=for-the-badge&logo=github&logoColor=ffffff" alt="SpeedoType Repo" />
+<a href="https://github.com/FutureAlok1445/reimbursement-automation-system">
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-FF007F?style=for-the-badge&logo=github&logoColor=ffffff" alt="Reimbursement Repo" />
 </a>
 
 </td>
@@ -180,39 +145,51 @@ Interactive typing enhancement web application built for measuring typing veloci
 <tr>
 <td width="50%" valign="top">
 
-### 💸 Reimbursement Automation System
+### 🏛️ HistoFacts
 
-Comprehensive role-based university reimbursement platform featuring submission, verification, multi-level hierarchy approvals, and payout tracking.
+AI-powered historical education platform featuring multiplayer WebSocket quizzes, study notes generation, and a token reward economy.
 
-**Roles:** Student · Faculty · Coordinator · HOD · Principal · Accounts  
-**Stack:** React · Node.js · Express · PostgreSQL
+- **Problem:** Traditional history learning is static, text-heavy, and lacks engaging peer-to-peer competition.
+- **Approach:** Real-time Kahoot-style quiz lobbies via WebSockets, Wikimedia historical event sync, and LLM-powered PDF curriculum study note generation.
+- **Stack:** `React 19` • `FastAPI` • `PostgreSQL 16` • `WebSocket` • `Docker` • `Tailwind CSS`
 
 <br/>
 
-<a href="https://github.com/Aspira-2k25/reimbursement-automation-system-new">
-  <img src="https://img.shields.io/badge/VIEW_PROJECT-7F00FF?style=for-the-badge&logo=github&logoColor=ffffff" alt="Reimbursement Project" />
+<a href="https://github.com/FutureAlok1445/HistoFacts">
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-7F00FF?style=for-the-badge&logo=github&logoColor=ffffff" alt="HistoFacts Repo" />
 </a>
 
 </td>
 
 <td width="50%" valign="top">
 
-### 📦 ELMS (Enterprise Logistics)
+### 🛡️ SIH AURA (Advanced URL Response Analyzer)
 
-High-throughput distributed microservice architecture for supply chain route simulation, inventory demand forecasting, and queuing.
+National Finalist platform built for Smart India Hackathon (SIH) 2025 for forensic PCAP and IPDR network analysis.
 
-**Features:** BullMQ Async Jobs · Redis Caching · ML Volume Predictor  
-**Stack:** React · Node.js · FastAPI · Redis · PostgreSQL
+- **Problem:** Security analysts struggle to distinguish between benign attack attempts and confirmed network breaches.
+- **Approach:** Forensic network packet triage with interactive 3D threat topology visualizations and curated traffic dataset exploration.
+- **Stack:** `React 19` • `Vite 7` • `Tailwind CSS` • `Python` • `Three.js` • `Kibana`
 
 <br/>
 
-<a href="https://github.com/FutureAlok1445/Logistic-Module">
-  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="Logistics Module Repo" />
+<a href="https://github.com/FutureAlok1445/Advanced-URL-Response-Analyzer-SIH2025">
+  <img src="https://img.shields.io/badge/VIEW_REPOSITORY-00F2FE?style=for-the-badge&logo=github&logoColor=000000" alt="SIH AURA Repo" />
 </a>
 
 </td>
 </tr>
 </table>
+
+---
+
+<div align="center">
+
+## 🏆 _`system.trophies()`_
+
+<img src="assets/trophy.svg" width="100%" alt="FutureAlok1445 GitHub Trophies" />
+
+</div>
 
 ---
 
@@ -241,13 +218,13 @@ High-throughput distributed microservice architecture for supply chain route sim
 
 <div align="center">
 
-## `> contribution.snake --execute`
+## 🌆 _`contribution.city --isometric-3d`_
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake.svg">
-  <img alt="GitHub Contribution Snake Animation" src="https://raw.githubusercontent.com/FutureAlok1445/FutureAlok1445/output/github-contribution-grid-snake-neon.svg" width="100%">
-</picture>
+<i>Every commit builds another tower — and a neon serpent carries the pulse of the city.</i>
+
+<br/><br/>
+
+<img src="generated/contribution-city-snake.svg" width="100%" alt="FutureAlok1445 3D Contribution City with Neon Snake" />
 
 </div>
 
@@ -255,7 +232,7 @@ High-throughput distributed microservice architecture for supply chain route sim
 
 ## `> system.highlights()`
 
-- 🏅 **National Finalist — Smart India Hackathon (SIH) 2025** (Project AURA - Decentralized Governance).
+- 🏅 **National Finalist — Smart India Hackathon (SIH) 2025** (Project AURA - Advanced URL Response Analyzer).
 - 🥇 **Winner — OpsStorm Hackathon** (Automated Container Orchestration & Self-Healing Services).
 - 🥇 **Winner — IEEE Hackathon** (Decentralized Verification Ledger).
 - ☁️ **Certified — Google Cloud Platform (GCP)** Generative AI Fundamentals.
@@ -268,13 +245,9 @@ High-throughput distributed microservice architecture for supply chain route sim
 
 ## `> developer.mindset()`
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=16&pause=4000&color=FF007F&center=true&vCenter=true&width=900&height=50&lines=%22Talk+is+cheap.+Show+me+the+code.%22+—+Linus+Torvalds;%22First%2C+solve+the+problem.+Then%2C+write+the+code.%22;%22Programs+must+be+written+for+people+to+read.%22" alt="Developer Quotes"/>
+<img src="assets/developer-quote.svg" width="100%" alt="Developer Quote" />
 
 <br/><br/>
-
-### `while(alive) { learn(); build(); improve(); }`
-
-<br/>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F2FE,50:7F00FF,100:FF007F&height=130&section=footer" width="100%" alt="Footer"/>
 

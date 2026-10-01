@@ -1,0 +1,57 @@
+name: Generate 3D Contribution City & Analytics
+
+on:
+  schedule:
+    # Run automatically every 24 hours at midnight UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "generated/**"
+      - "assets/**"
+      - "README.md"
+
+permissions:
+  contents: write
+
+jobs:
+  build-city:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate 3D Contribution City SVG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.repository_owner }}
+        run: |
+          python scripts/generate_contribution_city.py "$GITHUB_ACTOR" "generated/contribution-city-snake.svg"
+
+      - name: Commit and Push if Changed
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Stage the generated file
+          git add generated/contribution-city-snake.svg
+          
+          # Only commit if there are staged modifications
+          if git diff --staged --quiet; then
+            echo "No changes detected in generated Contribution City SVG. Skipping commit."
+          else
+            echo "Changes detected in Contribution City SVG. Committing and pushing..."
+            git commit -m "chore: update contribution city [skip ci]"
+            git push origin main
+          fi

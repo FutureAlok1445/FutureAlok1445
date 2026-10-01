@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 130" width="100%" height="130" fill="none">
+  <defs>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#7F00FF" />
+      <stop offset="100%" stop-color="#FF007F" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#FF007F" />
+    </linearGradient>
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes pulseGlow {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .terminal-header {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      fill: #00F2FE;
+      letter-spacing: 1px;
+    }
+    .quote-text {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      fill: #FFFFFF;
+    }
+    .author-text {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      fill: #FF007F;
+    }
+    .sub-routine {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      fill: #94A3B8;
+    }
+    .cursor {
+      animation: blinkCursor 1s infinite;
+      fill: #00F2FE;
+    }
+    .card-border {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+  </style>
+
+  <!-- Card Background -->
+  <rect x="2" y="2" width="846" height="126" rx="10" ry="10" fill="#02040A" />
+  <rect x="2" y="2" width="846" height="126" rx="10" ry="10" fill="#0B0F19" fill-opacity="0.85" />
+  <rect class="card-border" x="2" y="2" width="846" height="126" rx="10" ry="10" stroke="url(#borderGrad)" stroke-width="1.5" />
+
+  <!-- Terminal Header / Status Indicator -->
+  <circle cx="25" cy="24" r="5" fill="#FF007F" opacity="0.9" />
+  <circle cx="42" cy="24" r="5" fill="#7F00FF" opacity="0.9" />
+  <circle cx="59" cy="24" r="5" fill="#00F2FE" opacity="0.9" />
+  <text x="80" y="28" class="terminal-header">&gt; developer.mindset()</text>
+
+  <!-- Quote Content -->
+  <text x="35" y="68" class="quote-text">
+    <tspan fill="#00F2FE">“</tspan>Talk is cheap. Show me the code.<tspan fill="#00F2FE">”</tspan>
+    <tspan dx="15" class="author-text">— Linus Torvalds</tspan>
+  </text>
+
+  <!-- Sub-Routine Execution Line -->
+  <text x="35" y="102" class="sub-routine">
+    <tspan fill="#7F00FF">&gt;&gt;</tspan> while(<tspan fill="#00F2FE">alive</tspan>) { <tspan fill="#00F2FE">learn</tspan>(); <tspan fill="#00F2FE">build</tspan>(); <tspan fill="#00F2FE">improve</tspan>(); }
+    <tspan class="cursor">_</tspan>
+  </text>
+</svg>
