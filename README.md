@@ -218,13 +218,10 @@ National Finalist platform built for Smart India Hackathon (SIH) 2025 for forens
 
 <div align="center">
 
-## 🌆 _`contribution.city --isometric-3d`_
-
-<i>Every commit builds another tower — and a neon serpent carries the pulse of the city.</i>
-
+## 🌆 My Contribution City
+<i>Every commit builds another tower — and a neon pulse carries the city's energy.</i>
 <br/><br/>
-
-<img src="generated/contribution-city-snake.svg" width="100%" alt="FutureAlok1445 3D Contribution City with Neon Snake" />
+<img src="./generated/contribution-city-snake.svg" width="100%" alt="FutureAlok1445 Contribution City with Animated Neon Pulse Snake" />
 
 </div>
 
