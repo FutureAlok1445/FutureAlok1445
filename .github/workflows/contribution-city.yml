@@ -32,26 +32,32 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Generate 3D Contribution City SVG
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pillow
+
+      - name: Generate 3D Contribution City & Snake Game Simulation
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.repository_owner }}
         run: |
-          python scripts/generate_contribution_city.py "$GITHUB_ACTOR" "generated/contribution-city-snake.svg"
+          python scripts/generate_contribution_city.py "$GITHUB_ACTOR" "generated"
 
       - name: Commit and Push if Changed
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Stage the generated file
-          git add generated/contribution-city-snake.svg
+          # Stage the generated assets (GIF, WebP)
+          git add generated/
           
           # Only commit if there are staged modifications
           if git diff --staged --quiet; then
-            echo "No changes detected in generated Contribution City SVG. Skipping commit."
+            echo "No changes detected in generated Contribution City assets. Skipping commit."
           else
-            echo "Changes detected in Contribution City SVG. Committing and pushing..."
-            git commit -m "chore: update contribution city [skip ci]"
+            echo "Changes detected in Contribution City assets. Committing and pushing..."
+            git commit -m "chore: update contribution city snake simulation [skip ci]"
             git push origin main
           fi
+

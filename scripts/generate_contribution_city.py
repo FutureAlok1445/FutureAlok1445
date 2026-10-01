@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
 """
 scripts/generate_contribution_city.py
-Generates a custom 3D isometric GitHub Contribution City SVG with an integrated
-animated neon pulse serpent (snake) and real-time profile analytics.
+Generates a custom 3D isometric GitHub Contribution City featuring a true
+procedural 2D Snake game simulation (A* pathfinding, obstacle avoidance,
+dynamic food target spawning, eating effects, snake growth, and 3D occlusion).
+
+Outputs:
+  - generated/contribution-city-snake.gif  (Optimized animated GIF, 100% universal on GitHub)
+  - generated/contribution-city-snake.webp (High-definition animated WebP)
+  - generated/contribution-city-snake.svg  (High-res static/vector fallback)
 """
 
 import sys
 import os
 import json
 import math
+import random
+import heapq
 import re
 from datetime import datetime, timezone
 import urllib.request
 import urllib.error
+from PIL import Image, ImageDraw, ImageFont
 
 # Set stdout encoding for cross-platform compatibility
 if hasattr(sys.stdout, "reconfigure"):
@@ -234,11 +243,11 @@ def calculate_building_heights(cells: list) -> dict:
     """
     Maps each cell (x, y) to an isometric building height based on real contribution counts.
     Height Logic:
-      0 contributions -> 0 (flat isometric foundation slab)
+      0 contributions -> 0px (flat street foundation slab)
       1 contribution  -> 12px (small computing node)
       2-3 contribs    -> 22px (medium cyber facility)
       4-6 contribs    -> 40px (high-rise tech tower)
-      7+ contribs     -> 58px to 78px (apex illuminated skyscraper)
+      7+ contribs     -> 56px to 76px (apex illuminated skyscraper)
     """
     heights = {}
     for c in cells:
@@ -254,555 +263,625 @@ def calculate_building_heights(cells: list) -> dict:
         elif level == 3 or (4 <= count <= 6):
             h = 40
         else:
-            h = min(78, 54 + count * 2)
+            h = min(76, 52 + count * 2)
             
         heights[(c["x"], c["y"])] = h
     return heights
 
 
-def draw_building(x: int, y: int, height: float, origin_x: float, origin_y: float, dx: float, dy: float, level: int, count: int) -> str:
+def get_iso_coords(x: float, y: float, origin_x: float = 65.0, origin_y: float = 135.0, dx: float = 10.8, dy: float = 5.4) -> tuple:
     """
-    Renders an isometric skyscraper with Top, Left, and Right faces, plus glowing cyber edge lines.
+    Converts 2D contribution grid coordinates (x: 0..51, y: 0..6) into screen isometric (gx, gy).
     """
-    # Grid coordinates
-    gx = origin_x + (x * 12.0) - (y * 5.6)
-    gy = origin_y + (x * (dy * 0.95)) + (y * 11.0)
-    
-    # Roof center
-    rx = gx
-    ry = gy - height
-
-    # Flat ground tile (Level 0)
-    if level == 0 or height == 0:
-        p_top = f"{gx:.1f},{gy:.1f} {gx+dx:.1f},{gy+dy:.1f} {gx:.1f},{gy+2*dy:.1f} {gx-dx:.1f},{gy+dy:.1f}"
-        return f'<polygon points="{p_top}" fill="#080E18" stroke="#121D2F" stroke-width="0.75" />\n'
-
-    # Color selection based on contribution level
-    if level == 1:
-        top_fill = "#005573"
-        left_fill = "#003A4F"
-        right_fill = "#002433"
-        stroke_col = "#00F2FE"
-        stroke_op = "0.7"
-    elif level == 2:
-        top_fill = "#0088B0"
-        left_fill = "#005E7A"
-        right_fill = "#003E52"
-        stroke_col = "#00F2FE"
-        stroke_op = "0.85"
-    elif level == 3:
-        top_fill = "#6B00D7"
-        left_fill = "#4B0096"
-        right_fill = "#320063"
-        stroke_col = "#A855F7"
-        stroke_op = "0.9"
-    else: # Level 4 / Megatower
-        top_fill = "#D6006B"
-        left_fill = "#9E004F"
-        right_fill = "#6B0035"
-        stroke_col = "#FF007F"
-        stroke_op = "1.0"
-
-    parts = []
-    
-    # Left Face
-    p_left = f"{gx-dx:.1f},{ry+dy:.1f} {gx:.1f},{ry+2*dy:.1f} {gx:.1f},{gy+2*dy:.1f} {gx-dx:.1f},{gy+dy:.1f}"
-    parts.append(f'<polygon points="{p_left}" fill="{left_fill}" stroke="{stroke_col}" stroke-width="0.5" stroke-opacity="{stroke_op}" />')
-
-    # Right Face
-    p_right = f"{gx:.1f},{ry+2*dy:.1f} {gx+dx:.1f},{ry+dy:.1f} {gx+dx:.1f},{gy+dy:.1f} {gx:.1f},{gy+2*dy:.1f}"
-    parts.append(f'<polygon points="{p_right}" fill="{right_fill}" stroke="{stroke_col}" stroke-width="0.5" stroke-opacity="{stroke_op}" />')
-
-    # Top Roof Face
-    p_top = f"{rx:.1f},{ry:.1f} {rx+dx:.1f},{ry+dy:.1f} {rx:.1f},{ry+2*dy:.1f} {rx-dx:.1f},{ry+dy:.1f}"
-    parts.append(f'<polygon points="{p_top}" fill="{top_fill}" stroke="{stroke_col}" stroke-width="0.9" />')
-
-    # Animated glowing roof beacon for skyscrapers
-    if height >= 35:
-        beacon_cx = rx
-        beacon_cy = ry + dy
-        anim_delay = (x * 0.13) % 2.5
-        parts.append(f'<circle class="beacon-pulse" style="animation-delay: {anim_delay:.2f}s;" cx="{beacon_cx:.1f}" cy="{beacon_cy:.1f}" r="1.6" fill="#00F2FE" />')
-
-    return "\n".join(parts) + "\n"
+    gx = origin_x + (x * 11.2) - (y * 5.4)
+    gy = origin_y + (x * 5.3) + (y * 10.8)
+    return gx, gy
 
 
 # ==============================================================================
-# 3. SLEEK 2D ANIMATED NEON PULSE SERPENT (SNAKE PATH ENGINE)
+# 3. CLASSIC SNAKE GAME SIMULATION & A* PATHFINDING
 # ==============================================================================
 
-def generate_snake_route(cells: list, heights: dict, origin_x: float, origin_y: float, dx: float, dy: float) -> str:
+def astar_grid_path(start: tuple, goal: tuple, obstacles: set, grid_w: int = 52, grid_h: int = 7) -> list:
     """
-    Computes a smooth, elegant spline flowing diagonally through the city from older weeks
-    to the newest week.
-    The snake is rendered as:
-      1. A thin, subtle cyan guide conduit rail (stroke-width: 1.4px).
-      2. An animated glowing neon energy pulse that races along the path continuously.
-      3. A traveling bright neon spark head with SVG animateMotion.
-    Occupies ~18% visual attention, perfectly supporting the city without overpowering it.
+    Finds the optimal path between start and goal on the 52x7 grid.
+    Tall buildings (obstacles) are strictly avoided.
+    Includes turn penalty to ensure intentional, clean street turns without chaotic jitter.
     """
-    sorted_cells = sorted(cells, key=lambda c: (c["x"], c["y"]))
-    weeks = sorted(list(set(c["x"] for c in sorted_cells)))
+    frontier = []
+    heapq.heappush(frontier, (0, start, None))
+    came_from = {start: None}
+    cost_so_far = {start: 0}
     
-    # Sample 14 smooth control points across the 52 weeks
-    control_pts = []
-    step = max(1, len(weeks) // 13)
-    for i in range(0, len(weeks), step):
-        w = weeks[i]
-        week_cells = [c for c in sorted_cells if c["x"] == w]
-        if not week_cells:
-            continue
+    while frontier:
+        _, current, last_dir = heapq.heappop(frontier)
         
-        # Weave smoothly across the days (sinusoidal rhythm through activity)
-        preferred_y = int(3 + 2.5 * math.sin(i * 0.6))
-        chosen = min(week_cells, key=lambda c: abs(c["y"] - preferred_y))
+        if current == goal:
+            break
+            
+        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            nxt = (current[0] + dx, current[1] + dy)
+            if 0 <= nxt[0] < grid_w and 0 <= nxt[1] < grid_h:
+                # Obstacle check (only goal itself is permitted if it's the target)
+                if nxt in obstacles and nxt != goal:
+                    continue
+                
+                # Step cost + turn penalty for cleaner snake motion
+                turn_cost = 0.35 if (last_dir is not None and last_dir != (dx, dy)) else 0.0
+                new_cost = cost_so_far[current] + 1.0 + turn_cost
+                
+                if nxt not in cost_so_far or new_cost < cost_so_far[nxt]:
+                    cost_so_far[nxt] = new_cost
+                    # Manhattan distance heuristic
+                    priority = new_cost + (abs(nxt[0] - goal[0]) + abs(nxt[1] - goal[1])) * 1.2
+                    heapq.heappush(frontier, (priority, nxt, (dx, dy)))
+                    came_from[nxt] = current
+                    
+    # Reconstruct path
+    curr = goal
+    path = []
+    while curr is not None:
+        path.append(curr)
+        curr = came_from.get(curr)
         
-        gx = origin_x + (chosen["x"] * 12.0) - (chosen["y"] * 5.6)
-        gy = origin_y + (chosen["x"] * (dy * 0.95)) + (chosen["y"] * 11.0)
-        h = heights.get((chosen["x"], chosen["y"]), 0)
-        
-        # Float just slightly above the rooftop
-        py = gy - h - 5.0
-        control_pts.append((gx, py))
+    path.reverse()
+    return path
 
-    # Always terminate at the latest active day
-    last_week_cells = [c for c in sorted_cells if c["x"] == weeks[-1]]
-    if last_week_cells:
-        last_day = max(last_week_cells, key=lambda c: c.get("count", 0))
-        gx = origin_x + (last_day["x"] * 12.0) - (last_day["y"] * 5.6)
-        gy = origin_y + (last_day["x"] * (dy * 0.95)) + (last_day["y"] * 11.0)
-        h = heights.get((last_day["x"], last_day["y"]), 0)
-        control_pts.append((gx, gy - h - 6.0))
 
-    if len(control_pts) < 2:
-        return ""
-
-    # Build smooth cubic Bezier path
-    d_parts = [f"M {control_pts[0][0]:.1f},{control_pts[0][1]:.1f}"]
-    for i in range(len(control_pts) - 1):
-        p0 = control_pts[max(0, i - 1)]
-        p1 = control_pts[i]
-        p2 = control_pts[i + 1]
-        p3 = control_pts[min(len(control_pts) - 1, i + 2)]
-        
-        # Catmull-Rom to Cubic Bezier conversion
-        cp1x = p1[0] + (p2[0] - p0[0]) / 6.0
-        cp1y = p1[1] + (p2[1] - p0[1]) / 6.0
-        cp2x = p2[0] - (p3[0] - p1[0]) / 6.0
-        cp2y = p2[1] - (p3[1] - p1[1]) / 6.0
-        
-        d_parts.append(f"C {cp1x:.1f},{cp1y:.1f} {cp2x:.1f},{cp2y:.1f} {p2[0]:.1f},{p2[1]:.1f}")
-        
-    path_d = " ".join(d_parts)
-
-    out = []
+def plan_snake_game_tour(cells: list, heights: dict, username: str) -> tuple:
+    """
+    Plans a reproducible, pseudo-random Snake game tour across the contribution city:
+    - 4 distinct food targets located on flat street tiles in separate city sectors
+    - A* navigation weaving around tall skyscrapers
+    - Smooth sub-stepping (2 frames per cell move)
+    - Returns: (frames_data, targets_list)
+    """
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    seed_str = f"{username}_{today}"
+    # Seeded pseudo-randomness for stable daily runs
+    seed_val = sum(ord(c) for c in seed_str)
+    rng = random.Random(seed_val)
     
-    # 1. Subtle Cyber Laser Guide Rail (Static thin conduit)
-    out.append(f'<path d="{path_d}" fill="none" stroke="#00F2FE" stroke-width="1.2" stroke-opacity="0.25" stroke-dasharray="2 3" />')
-
-    # 2. Base Neon Energy Conduit (Ambient glow)
-    out.append(f'<path d="{path_d}" fill="none" stroke="#7F00FF" stroke-width="4.5" stroke-opacity="0.2" filter="url(#glowNeon)" />')
-
-    # 3. Animated Traveling Neon Serpent Pulse (CSS Keyframes stroke-dashoffset)
-    out.append(f'<path id="snakeConduit" class="snake-pulse-line" d="{path_d}" fill="none" stroke="url(#serpentGrad)" stroke-width="2.2" stroke-linecap="round" filter="url(#glowNeon)" />')
-
-    # 4. Animated Traveling Pulse Head Sparks (SMIL animateMotion)
-    out.append(f"""
-    <g>
-      <animateMotion dur="4.2s" repeatCount="indefinite" rotate="auto" path="{path_d}" />
-      <!-- Primary Glowing Head -->
-      <circle cx="0" cy="0" r="4.0" fill="#00F2FE" filter="url(#glowNeon)" />
-      <circle cx="0" cy="0" r="1.8" fill="#FFFFFF" />
-      <ellipse cx="-4" cy="0" rx="5" ry="1.5" fill="#FF007F" opacity="0.8" />
-    </g>
-    <g>
-      <animateMotion dur="4.2s" repeatCount="indefinite" rotate="auto" begin="-2.1s" path="{path_d}" />
-      <!-- Secondary Harmonic Wave -->
-      <circle cx="0" cy="0" r="2.8" fill="#7F00FF" opacity="0.8" filter="url(#glowNeon)" />
-      <circle cx="0" cy="0" r="1.2" fill="#FFFFFF" />
-    </g>
-    """)
-
-    return "\n".join(out) + "\n"
-
-
-# ==============================================================================
-# 4. COMPACT INTEGRATED ANALYTICS: RADAR & DONUT CHARTS
-# ==============================================================================
-
-def draw_radar_chart(metrics: dict, cx: float, cy: float, radius: float = 72.0) -> str:
-    """
-    Renders a compact, sleek 5-axis Radar chart for engineering telemetry:
-    COMMITS, REPOSITORIES, PULL REQUESTS, STARS, ISSUES.
-    (Reviews metric removed as instructed).
-    """
-    axes = [
-        ("COMMITS", metrics.get("commits", 1027), 1400),
-        ("REPOS", metrics.get("repos", 35), 45),
-        ("PRS", metrics.get("prs", 152), 180),
-        ("STARS", metrics.get("stars", 13), 25),
-        ("ISSUES", metrics.get("issues", 2), 15),
+    # 1. Identify obstacles (buildings with height >= 24px)
+    obstacles = {pos for pos, h in heights.items() if h >= 24}
+    
+    # 2. Candidate targets: flat or low tiles (height <= 12px) away from extreme boundaries
+    sectors = [
+        (4, 14, 1, 5),   # Sector 1: West
+        (17, 26, 1, 5),  # Sector 2: Mid-West
+        (29, 39, 1, 5),  # Sector 3: Mid-East
+        (42, 49, 1, 5)   # Sector 4: East
     ]
     
-    n = len(axes)
-    angle_step = (2 * math.pi) / n
-    start_angle = -math.pi / 2
-    
-    parts = []
-    
-    # Compact HUD Header
-    parts.append(f'<text x="{cx-70}" y="{cy-85}" fill="#00F2FE" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" letter-spacing="1">&gt; telemetry.radar</text>')
-    
-    # Concentric Web Rings
-    for level in [0.33, 0.66, 1.0]:
-        ring_pts = []
-        r = radius * level
-        for i in range(n):
-            angle = start_angle + i * angle_step
-            rx = cx + r * math.cos(angle)
-            ry = cy + r * math.sin(angle)
-            ring_pts.append(f"{rx:.1f},{ry:.1f}")
-        parts.append(f'<polygon points="{" ".join(ring_pts)}" fill="none" stroke="#152033" stroke-width="0.9" />')
-
-    # Radial Spokes & Metric Polygon
-    poly_pts = []
-    for i, (label, val, target_max) in enumerate(axes):
-        angle = start_angle + i * angle_step
-        ox = cx + radius * math.cos(angle)
-        oy = cy + radius * math.sin(angle)
-        parts.append(f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{ox:.1f}" y2="{oy:.1f}" stroke="#1A2942" stroke-width="0.9" />')
-        
-        # Logarithmic normalization with balanced bounds
-        norm = min(1.0, max(0.20, math.log10(val + 1) / math.log10(target_max + 1)))
-        px = cx + (radius * norm) * math.cos(angle)
-        py = cy + (radius * norm) * math.sin(angle)
-        poly_pts.append(f"{px:.1f},{py:.1f}")
-        
-        # Compact Text Labels
-        lx = cx + (radius + 14) * math.cos(angle)
-        ly = cy + (radius + 10) * math.sin(angle)
-        anchor = "middle"
-        if math.cos(angle) > 0.3:
-            anchor = "start"
-        elif math.cos(angle) < -0.3:
-            anchor = "end"
-        parts.append(f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" text-anchor="{anchor}">{label}: <tspan fill="#00F2FE">{val}</tspan></text>')
-
-    # Metric Filled Polygon
-    poly_str = " ".join(poly_pts)
-    parts.append(f'<polygon points="{poly_str}" fill="url(#radarGrad)" fill-opacity="0.38" stroke="#00F2FE" stroke-width="1.6" />')
-    
-    for pt in poly_pts:
-        vx, vy = map(float, pt.split(","))
-        parts.append(f'<circle cx="{vx:.1f}" cy="{vy:.1f}" r="2.4" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" />')
-
-    # Rotating radar scanner ray
-    parts.append(f"""
-    <g transform="translate({cx}, {cy})">
-      <line class="radar-scan" x1="0" y1="0" x2="0" y2="{-radius}" stroke="#00F2FE" stroke-width="1.2" opacity="0.5" />
-    </g>
-    """)
-
-    return "\n".join(parts) + "\n"
-
-
-def draw_donut_chart(lang_data: dict, cx: float, cy: float, r_outer: float = 60.0, r_inner: float = 40.0) -> str:
-    """
-    Renders compact repository language distribution donut chart.
-    """
-    parts = []
-    
-    parts.append(f'<text x="{cx-80}" y="{cy-75}" fill="#7F00FF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" letter-spacing="1">&gt; languages.ratio</text>')
-
-    palette = [
-        ("#00F2FE", "JavaScript"),
-        ("#7F00FF", "TypeScript"),
-        ("#FF007F", "Python"),
-        ("#38BDF8", "Jupyter/Data"),
-        ("#A855F7", "CSS/HTML"),
-        ("#94A3B8", "Other")
-    ]
-    
-    sorted_langs = sorted(lang_data.items(), key=lambda x: x[1], reverse=True)
-    total_val = sum(lang_data.values()) or 1
-    
-    top_items = []
-    other_val = 0
-    for i, (k, v) in enumerate(sorted_langs):
-        if i < 4:
-            top_items.append((k, v))
+    targets = []
+    for x_min, x_max, y_min, y_max in sectors:
+        cands = [
+            (x, y) for x in range(x_min, x_max + 1) for y in range(y_min, y_max + 1)
+            if heights.get((x, y), 0) <= 12 and (x, y) not in obstacles
+        ]
+        if cands:
+            targets.append(rng.choice(cands))
         else:
-            other_val += v
+            targets.append(( (x_min + x_max) // 2, 3 ))
             
-    if other_val > 0:
-        top_items.append(("Other", other_val))
-
-    current_angle = -math.pi / 2
-    donut_cx = cx - 45
-    donut_cy = cy + 5
-    legend_x = cx + 35
-    legend_y = cy - 40
-
-    for i, (name, count) in enumerate(top_items):
-        pct = (count / total_val) * 100
-        angle_sweep = (count / total_val) * 2 * math.pi
+    print(f"[*] Generated {len(targets)} procedural food targets: {targets}")
+    
+    # 3. Pathfinding across targets in cyclic sequence: T0 -> T1 -> T2 -> T3 -> T0
+    legs = []
+    num_targets = len(targets)
+    for i in range(num_targets):
+        start = targets[i]
+        goal = targets[(i + 1) % num_targets]
+        leg_path = astar_grid_path(start, goal, obstacles)
+        if len(leg_path) < 2:
+            # Fallback simple direct path if blocked
+            leg_path = [start, goal]
+        legs.append(leg_path)
         
-        start_a = current_angle
-        end_a = current_angle + angle_sweep
-        current_angle = end_a
+    # 4. Assemble the master waypoint timeline
+    # Sub-step each grid move into 2 smooth sub-frames for fluid movement
+    master_timeline = []
+    leg_ranges = [] # tracks which target is active for each frame
+    curr_frame = 0
+    
+    for leg_idx, leg in enumerate(legs):
+        start_frame = curr_frame
+        # Exclude last node of leg to avoid duplicate with next leg's start
+        for step_i in range(len(leg) - 1):
+            p0 = leg[step_i]
+            p1 = leg[step_i + 1]
+            
+            # Sub-frame 0
+            master_timeline.append((p0[0], p0[1]))
+            # Sub-frame 1 (interpolated midpoint)
+            master_timeline.append(((p0[0] + p1[0]) * 0.5, (p0[1] + p1[1]) * 0.5))
+            curr_frame += 2
+            
+        end_frame = curr_frame - 1
+        # Target being pursued during this leg is (leg_idx + 1) % num_targets
+        target_pos = targets[(leg_idx + 1) % num_targets]
+        leg_ranges.append({
+            "leg_idx": leg_idx,
+            "start_frame": start_frame,
+            "end_frame": end_frame,
+            "target_pos": target_pos,
+            "eat_frame": end_frame # food is reached at the end of the leg
+        })
         
-        color = palette[i % len(palette)][0]
-        
-        x1 = donut_cx + r_outer * math.cos(start_a)
-        y1 = donut_cy + r_outer * math.sin(start_a)
-        x2 = donut_cx + r_outer * math.cos(end_a)
-        y2 = donut_cy + r_outer * math.sin(end_a)
-        
-        x3 = donut_cx + r_inner * math.cos(end_a)
-        y3 = donut_cy + r_inner * math.sin(end_a)
-        x4 = donut_cx + r_inner * math.cos(start_a)
-        y4 = donut_cy + r_inner * math.sin(start_a)
-        
-        large_arc = 1 if angle_sweep > math.pi else 0
-        
-        d = (f"M {x1:.2f} {y1:.2f} "
-             f"A {r_outer:.2f} {r_outer:.2f} 0 {large_arc} 1 {x2:.2f} {y2:.2f} "
-             f"L {x3:.2f} {y3:.2f} "
-             f"A {r_inner:.2f} {r_inner:.2f} 0 {large_arc} 0 {x4:.2f} {y4:.2f} Z")
-             
-        parts.append(f'<path d="{d}" fill="{color}" stroke="#090E17" stroke-width="1.2" />')
-        
-        # Legend Item
-        parts.append(f'<circle cx="{legend_x}" cy="{legend_y-3}" r="3.5" fill="{color}" />')
-        parts.append(f'<text x="{legend_x+10}" y="{legend_y}" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600">{name}</text>')
-        parts.append(f'<text x="{legend_x+135}" y="{legend_y}" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9.5" text-anchor="end">{pct:.1f}%</text>')
-        legend_y += 19
-
-    parts.append(f'<text x="{donut_cx}" y="{donut_cy+4}" fill="#00F2FE" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">STACK</text>')
-
-    return "\n".join(parts) + "\n"
+    total_frames = len(master_timeline)
+    print(f"[*] Precomputed {total_frames} animation frames across {num_targets} food legs")
+    return master_timeline, targets, leg_ranges
 
 
 # ==============================================================================
-# 5. BOTTOM METRIC TELEMETRY BAR
+# 4. PILLOW RENDERING ENGINE (ISOMETRIC 3D + DEPTH OCCLUSION)
 # ==============================================================================
 
-def draw_stat_bar(stats: dict, y_pos: float = 605.0) -> str:
+def get_font(size: int, bold: bool = False):
     """
-    Renders an integrated, sleek cyber telemetry bar across the bottom.
+    Safely retrieves monospace font with cross-platform fallbacks.
     """
-    pods = [
-        ("⚡", "CONTRIBUTIONS", f"{stats.get('commits', 1027):,}+", "#00F2FE"),
-        ("⭐", "STARS EARNED", f"{stats.get('stars', 13)}", "#FF007F"),
-        ("🍴", "REPO FORKS", f"{stats.get('forks', 4)}", "#7F00FF"),
-        ("📦", "REPOSITORIES", f"{stats.get('repos', 35)}", "#00F2FE")
+    candidates = [
+        "consolab.ttf" if bold else "consola.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+        "DejaVuSansMono.ttf",
+        "arial.ttf"
+    ]
+    for font_name in candidates:
+        try:
+            return ImageFont.truetype(font_name, size)
+        except Exception:
+            continue
+    return ImageFont.load_default()
+
+
+def render_base_hud(width: int, height: int, profile_data: dict, cells: list) -> Image.Image:
+    """
+    Renders the static cyberpunk canvas: gradient background, gridlines, top header,
+    radar chart, language donut chart, and bottom telemetry bar.
+    """
+    img = Image.new("RGBA", (width, height), (2, 4, 10, 255))
+    draw = ImageDraw.Draw(img)
+    
+    # 1. Subtle Cyber Circuit Grid Background
+    for x in range(40, 700, 70):
+        draw.line([(x, 60), (x, 520)], fill=(0, 242, 254, 14), width=1)
+    for y in range(80, 520, 60):
+        draw.line([(40, y), (680, y)], fill=(0, 242, 254, 14), width=1)
+        
+    # 2. Outer Border
+    draw.rounded_rectangle([1, 1, width - 2, height - 2], radius=10, outline=(22, 34, 54), width=1)
+    
+    # 3. Top Cyberpunk HUD Header
+    draw.rectangle([40, 20, width - 40, 48], fill=(7, 12, 21), outline=(20, 32, 50), width=1)
+    # Status beacons
+    draw.ellipse([55, 30, 63, 38], fill=(0, 242, 254))
+    draw.ellipse([70, 30, 78, 38], fill=(127, 0, 255))
+    draw.ellipse([85, 30, 93, 38], fill=(255, 0, 127))
+    
+    font_hud_title = get_font(12, bold=True)
+    font_hud_meta = get_font(10, bold=False)
+    
+    draw.text((105, 27), "3D CONTRIBUTION CITY // PROCEDURAL SNAKE GAME ENGINE", fill=(0, 242, 254), font=font_hud_title)
+    draw.text((width - 320, 29), "STATUS: LIVE CYBER SERPENT (60 FPS)", fill=(148, 163, 184), font=font_hud_meta)
+
+    # 4. Right Side HUD Analytics Frame
+    draw.rounded_rectangle([720, 65, 1060, 525], radius=8, fill=(8, 14, 24, 230), outline=(21, 33, 54), width=1)
+    
+    # Section Header: RADAR
+    draw.text((740, 80), "METRIC RADAR // 5-AXIS", fill=(0, 242, 254), font=get_font(11, bold=True))
+    
+    # Draw Radar Chart
+    rcx, rcy, r_rad = 890, 185, 68
+    radar_axes = [
+        ("COMMITS", 0.95),
+        ("REPOS", min(1.0, profile_data.get("repos", 35) / 40.0)),
+        ("PRS", min(1.0, profile_data.get("prs", 152) / 200.0)),
+        ("STARS", min(1.0, profile_data.get("stars", 13) / 25.0)),
+        ("ISSUES", min(1.0, max(0.2, profile_data.get("issues", 2) / 10.0)))
+    ]
+    num_axes = len(radar_axes)
+    
+    # Concentric radar rings
+    for ring_step in [0.25, 0.5, 0.75, 1.0]:
+        ring_pts = []
+        for i in range(num_axes):
+            angle = -math.pi / 2 + (2 * math.pi * i / num_axes)
+            rx = rcx + ring_step * r_rad * math.cos(angle)
+            ry = rcy + ring_step * r_rad * math.sin(angle)
+            ring_pts.append((rx, ry))
+        draw.polygon(ring_pts, outline=(18, 28, 44), width=1)
+        
+    # Spokes and labels
+    poly_pts = []
+    font_axis = get_font(9, bold=True)
+    for i, (label, val) in enumerate(radar_axes):
+        angle = -math.pi / 2 + (2 * math.pi * i / num_axes)
+        sx = rcx + r_rad * math.cos(angle)
+        sy = rcy + r_rad * math.sin(angle)
+        draw.line([(rcx, rcy), (sx, sy)], fill=(18, 28, 44), width=1)
+        
+        # Value polygon
+        px = rcx + val * r_rad * math.cos(angle)
+        py = rcy + val * r_rad * math.sin(angle)
+        poly_pts.append((px, py))
+        
+        # Label offset
+        lx = rcx + (r_rad + 16) * math.cos(angle)
+        ly = rcy + (r_rad + 14) * math.sin(angle)
+        draw.text((lx - 16, ly - 5), label, fill=(148, 163, 184), font=font_axis)
+        
+    # Draw polygon fill
+    draw.polygon(poly_pts, fill=(0, 242, 254, 55), outline=(0, 242, 254), width=2)
+    for pt in poly_pts:
+        draw.ellipse([pt[0]-2, pt[1]-2, pt[0]+2, pt[1]+2], fill=(255, 0, 127))
+        
+    # Divider between radar and donut
+    draw.line([(735, 290), (1045, 290)], fill=(19, 28, 45), width=1)
+    
+    # Section Header: STACK
+    draw.text((740, 305), "TECH STACK // CODE FOOTPRINT", fill=(0, 242, 254), font=get_font(11, bold=True))
+    
+    # Language Donut Chart
+    dcx, dcy, d_outer, d_inner = 810, 410, 54, 34
+    languages = profile_data.get("languages", {})
+    total_bytes = sum(languages.values()) or 1
+    
+    lang_palette = [
+        ("JavaScript", (0, 242, 254)),
+        ("TypeScript", (127, 0, 255)),
+        ("Python", (255, 0, 127)),
+        ("Jupyter", (255, 150, 0)),
+        ("CSS/HTML", (0, 255, 128)),
+        ("Other", (100, 116, 139))
     ]
     
-    parts = []
-    # Container strip
-    parts.append(f'<rect x="40" y="{y_pos}" width="1120" height="52" rx="6" fill="#070C15" fill-opacity="0.85" stroke="#162236" stroke-width="1" />')
-    
-    col_w = 1120 / 4
-    for i, (icon, label, value, color) in enumerate(pods):
-        x = 40 + i * col_w
-        if i > 0:
-            # Divider line
-            parts.append(f'<line x1="{x}" y1="{y_pos+8}" x2="{x}" y2="{y_pos+44}" stroke="#131C2D" stroke-width="1" />')
-            
-        parts.append(f'<text x="{x+22}" y="{y_pos+33}" font-size="18">{icon}</text>')
-        parts.append(f'<text x="{x+50}" y="{y_pos+23}" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" letter-spacing="1">{label}</text>')
-        parts.append(f'<text x="{x+50}" y="{y_pos+41}" fill="{color}" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700">{value}</text>')
+    # Sort top languages
+    sorted_langs = sorted(languages.items(), key=lambda x: x[1], reverse=True)[:5]
+    top_sum = sum(v for _, v in sorted_langs)
+    other_val = total_bytes - top_sum
+    chart_langs = [(k, v) for k, v in sorted_langs]
+    if other_val > 0:
+        chart_langs.append(("Other", other_val))
         
-    return "\n".join(parts) + "\n"
-
-
-# ==============================================================================
-# 6. SVG COMPOSITION & EXPORT
-# ==============================================================================
-
-def compose_scene(cells: list, heights: dict, profile_data: dict, width: int = 1200, height: int = 680) -> str:
-    """
-    Assembles the complete 3D isometric GitHub Contribution City SVG with animation.
-    """
-    if cells:
-        d_start = cells[0].get("date", "2025.10.02").replace("-", ".")
-        d_end = cells[-1].get("date", "2026.10.02").replace("-", ".")
-    else:
-        d_start = "2025.10.02"
-        d_end = "2026.10.02"
-
-    origin_x = 75.0
-    origin_y = 155.0
-    dx = 11.2
-    dy = 5.6
-
-    # Draw city buildings (Painter's depth order)
-    sorted_cells = sorted(cells, key=lambda c: (c["x"] + c["y"], c["y"]))
+    curr_angle = -90.0
+    for idx, (lang_name, b_count) in enumerate(chart_langs):
+        color = lang_palette[idx % len(lang_palette)][1]
+        pct = b_count / total_bytes
+        sweep = pct * 360.0
+        
+        # Draw arc pie
+        draw.pieslice([dcx - d_outer, dcy - d_outer, dcx + d_outer, dcy + d_outer],
+                      start=curr_angle, end=curr_angle + sweep - 1.5, fill=color)
+        curr_angle += sweep
+        
+    # Center cutout for donut hole
+    draw.ellipse([dcx - d_inner, dcy - d_inner, dcx + d_inner, dcy + d_inner], fill=(8, 14, 24))
+    draw.text((dcx - 14, dcy - 5), "STACK", fill=(0, 242, 254), font=get_font(9, bold=True))
     
-    city_svg_parts = []
-    for c in sorted_cells:
-        x = c["x"]
-        y = c["y"]
-        h = heights.get((x, y), 0)
-        level = c.get("level", 0)
-        count = c.get("count", 0)
-        city_svg_parts.append(draw_building(x, y, h, origin_x, origin_y, dx, dy, level, count))
+    # Donut Legend
+    leg_x = 885
+    leg_y = 345
+    font_leg = get_font(9, bold=False)
+    for idx, (lang_name, b_count) in enumerate(chart_langs):
+        color = lang_palette[idx % len(lang_palette)][1]
+        pct_str = f"{(b_count / total_bytes)*100:.1f}%"
+        draw.rectangle([leg_x, leg_y + idx * 24 + 2, leg_x + 8, leg_y + idx * 24 + 10], fill=color)
+        draw.text((leg_x + 14, leg_y + idx * 24), f"{lang_name[:10]}", fill=(255, 255, 255), font=font_leg)
+        draw.text((leg_x + 105, leg_y + idx * 24), pct_str, fill=(148, 163, 184), font=font_leg)
 
-    # Snake Route & Pulse Motion
-    snake_svg = generate_snake_route(cells, heights, origin_x, origin_y, dx, dy)
-
-    # Compact Right Side Analytics
-    radar_svg = draw_radar_chart(profile_data, cx=985, cy=180, radius=72)
-    donut_svg = draw_donut_chart(profile_data["languages"], cx=975, cy=445, r_outer=58, r_inner=38)
-    stat_bar_svg = draw_stat_bar(profile_data, y_pos=600)
-
-    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="{height}" fill="none">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#02040A" />
-      <stop offset="60%" stop-color="#050A14" />
-      <stop offset="100%" stop-color="#09101C" />
-    </linearGradient>
-
-    <!-- Serpent Neon Flow Gradient -->
-    <linearGradient id="serpentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF007F" />
-      <stop offset="40%" stop-color="#7F00FF" />
-      <stop offset="100%" stop-color="#00F2FE" />
-    </linearGradient>
-
-    <!-- Radar Fill Gradient -->
-    <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00F2FE" />
-      <stop offset="100%" stop-color="#7F00FF" />
-    </linearGradient>
-
-    <!-- Glowing Filters -->
-    <filter id="glowNeon" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3.5" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-
-  <style>
-    @keyframes pulseFlow {{
-      0% {{ stroke-dashoffset: 1400; }}
-      100% {{ stroke-dashoffset: 0; }}
-    }}
-    @keyframes beaconBlink {{
-      0%, 100% {{ opacity: 0.35; r: 1.4; }}
-      50% {{ opacity: 1.0; r: 2.2; }}
-    }}
-    @keyframes radarRotate {{
-      0% {{ transform: rotate(0deg); }}
-      100% {{ transform: rotate(360deg); }}
-    }}
-    @keyframes hudPulse {{
-      0%, 100% {{ opacity: 0.8; }}
-      50% {{ opacity: 1.0; }}
-    }}
-
-    .snake-pulse-line {{
-      stroke-dasharray: 100 1200;
-      animation: pulseFlow 4.2s linear infinite;
-    }}
-    .beacon-pulse {{
-      animation: beaconBlink 2s ease-in-out infinite;
-    }}
-    .radar-scan {{
-      animation: radarRotate 6s linear infinite;
-      transform-origin: 0px 0px;
-    }}
-    .hud-beacon {{
-      animation: hudPulse 2s ease-in-out infinite;
-    }}
-
-    .hud-title {{
-      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      fill: #00F2FE;
-      letter-spacing: 1.5px;
-    }}
-    .hud-meta {{
-      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-      font-size: 10.5px;
-      font-weight: 500;
-      fill: #94A3B8;
-    }}
-  </style>
-
-  <!-- Canvas Background -->
-  <rect width="{width}" height="{height}" rx="10" fill="url(#bgGrad)" stroke="#162236" stroke-width="1.2" />
-
-  <!-- Background Cyber Circuit Grid Gridlines -->
-  <g opacity="0.08" stroke="#00F2FE" stroke-width="0.75">
-    <line x1="40" y1="120" x2="740" y2="120" />
-    <line x1="40" y1="240" x2="740" y2="240" />
-    <line x1="40" y1="360" x2="740" y2="360" />
-    <line x1="40" y1="480" x2="740" y2="480" />
-    <line x1="160" y1="70" x2="160" y2="580" />
-    <line x1="320" y1="70" x2="320" y2="580" />
-    <line x1="480" y1="70" x2="480" y2="580" />
-    <line x1="640" y1="70" x2="640" y2="580" />
-  </g>
-
-  <!-- Top HUD Header Bar -->
-  <g transform="translate(40, 32)">
-    <circle class="hud-beacon" cx="6" cy="6" r="3.5" fill="#00F2FE" />
-    <circle cx="18" cy="6" r="3.5" fill="#7F00FF" opacity="0.8" />
-    <circle cx="30" cy="6" r="3.5" fill="#FF007F" opacity="0.8" />
-    <text x="46" y="10" class="hud-title">3D CONTRIBUTION CITY // NEON PULSE SERPENT</text>
-    <text x="{width-80}" y="10" class="hud-meta" text-anchor="end">RANGE: <tspan fill="#00F2FE">{d_start}</tspan> → <tspan fill="#00F2FE">{d_end}</tspan> | SYSTEM: <tspan fill="#00F2FE" font-weight="700">ONLINE (60 FPS)</tspan></text>
-    <line x1="0" y1="20" x2="{width-80}" y2="20" stroke="#141E30" stroke-width="1" />
-  </g>
-
-  <!-- 3D Isometric City Grid (Painter's Algorithm Depth Order) -->
-  <g id="city-mesh">
-{"".join(city_svg_parts)}
-  </g>
-
-  <!-- Sleek 2D Animated Neon Pulse Serpent -->
-  <g id="neon-pulse-serpent">
-{snake_svg}
-  </g>
-
-  <!-- Integrated Right Side Analytics HUD -->
-  <g id="analytics-hud">
-    <!-- Right HUD Frame -->
-    <rect x="760" y="65" width="400" height="515" rx="8" fill="#080E18" fill-opacity="0.6" stroke="#152136" stroke-width="1" />
-{radar_svg}
-    <line x1="775" y1="330" x2="1145" y2="330" stroke="#131C2D" stroke-width="1" />
-{donut_svg}
-  </g>
-
-  <!-- Bottom Integrated Telemetry Bar -->
-  <g id="telemetry-bar">
-{stat_bar_svg}
-  </g>
-</svg>
-"""
-    return svg_content
+    # 5. Bottom Integrated Telemetry Bar
+    y_bar = 545
+    draw.rounded_rectangle([40, y_bar, width - 40, y_bar + 55], radius=6, fill=(7, 12, 21), outline=(22, 34, 54), width=1)
+    
+    pods = [
+        ("⚡", "CONTRIBUTIONS", f"{profile_data.get('commits', 1027):,}+", (0, 242, 254)),
+        ("⭐", "STARS EARNED", f"{profile_data.get('stars', 13)}", (255, 0, 127)),
+        ("🍴", "REPO FORKS", f"{profile_data.get('forks', 4)}", (127, 0, 255)),
+        ("📦", "REPOSITORIES", f"{profile_data.get('repos', 35)}", (0, 242, 254))
+    ]
+    pod_w = (width - 80) // 4
+    for i, (icon, label, val, col) in enumerate(pods):
+        px = 40 + i * pod_w
+        if i > 0:
+            draw.line([(px, y_bar + 10), (px, y_bar + 45)], fill=(19, 28, 45), width=1)
+            
+        draw.text((px + 20, y_bar + 14), icon, fill=col, font=get_font(18))
+        draw.text((px + 52, y_bar + 12), label, fill=(148, 163, 184), font=get_font(9, bold=True))
+        draw.text((px + 52, y_bar + 28), val, fill=col, font=get_font(14, bold=True))
+        
+    return img
 
 
-def save_output(svg_content: str, output_path: str):
+def draw_isometric_frame(base_img: Image.Image, frame_idx: int, snake_history: list,
+                         current_target: tuple, target_state: dict, cells: list, heights: dict) -> Image.Image:
     """
-    Saves the final generated SVG string to disk.
+    Renders a single animation frame using Painter's Algorithm:
+    Iterates depth slices D = x + y:
+      1. Ground foundation tiles at depth D
+      2. Snake body nodes & head at depth D
+      3. Glowing food target cube at depth D (with eating / pulse animations)
+      4. Building walls & rooftops at depth D
+    This guarantees 100% physically accurate 3D occlusion behind skyscrapers!
     """
-    out_dir = os.path.dirname(output_path)
-    if out_dir:
-        os.makedirs(out_dir, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg_content)
-    print(f"[✓] Successfully wrote {len(svg_content)} bytes to {output_path}")
+    frame = base_img.copy()
+    draw = ImageDraw.Draw(frame, "RGBA")
+    
+    dx = 10.8
+    dy = 5.4
+    
+    # Pre-index cells by depth (D = x + y)
+    depth_buckets = {}
+    for c in cells:
+        d = c["x"] + c["y"]
+        depth_buckets.setdefault(d, []).append(c)
+        
+    # Map snake segments by rounded grid depth
+    snake_depth_map = {}
+    for seg_idx, (sx, sy) in enumerate(snake_history):
+        sd = int(round(sx + sy))
+        snake_depth_map.setdefault(sd, []).append((seg_idx, sx, sy))
+        
+    # Target depth
+    target_d = current_target[0] + current_target[1]
+    
+    # Iterate across all depth slices (0 to 51 + 6 = 57)
+    max_d = 52 + 7
+    for d in range(max_d):
+        c_list = depth_buckets.get(d, [])
+        
+        # Step 1: Draw ground tiles for this depth
+        for c in c_list:
+            x, y = c["x"], c["y"]
+            gx, gy = get_iso_coords(x, y, dx=dx, dy=dy)
+            poly_ground = [(gx, gy), (gx + dx, gy + dy), (gx, gy + 2 * dy), (gx - dx, gy + dy)]
+            draw.polygon(poly_ground, fill=(8, 14, 24, 255), outline=(18, 29, 47, 255))
+            
+        # Step 2: Draw Snake segments at this depth
+        if d in snake_depth_map:
+            for seg_idx, sx, sy in snake_depth_map[d]:
+                sgx, sgy = get_iso_coords(sx, sy, dx=dx, dy=dy)
+                
+                # Head segment (index 0)
+                if seg_idx == 0:
+                    # Glowing diamond head
+                    hw, hh = 5.5, 3.0
+                    head_poly = [(sgx, sgy - hh), (sgx + hw, sgy), (sgx, sgy + hh), (sgx - hw, sgy)]
+                    # Outer cyan/purple halo
+                    draw.polygon([(sgx, sgy - hh - 2), (sgx + hw + 3, sgy), (sgx, sgy + hh + 2), (sgx - hw - 3, sgy)],
+                                 fill=(127, 0, 255, 60))
+                    # Main head
+                    draw.polygon(head_poly, fill=(0, 242, 254, 255), outline=(255, 255, 255, 255))
+                    # Center spark
+                    draw.ellipse([sgx - 1.5, sgy - 1.5, sgx + 1.5, sgy + 1.5], fill=(255, 255, 255, 255))
+                else:
+                    # Body segment: color gradient from Cyan -> Purple -> Pink
+                    # Ratio: 0 near head, 1 near tail
+                    ratio = min(1.0, seg_idx / max(1, len(snake_history) - 1))
+                    if ratio < 0.5:
+                        # Cyan to Purple
+                        t = ratio * 2.0
+                        cr = int(0 * (1 - t) + 127 * t)
+                        cg = int(242 * (1 - t) + 0 * t)
+                        cb = 254
+                    else:
+                        # Purple to Pink
+                        t = (ratio - 0.5) * 2.0
+                        cr = int(127 * (1 - t) + 255 * t)
+                        cg = 0
+                        cb = int(254 * (1 - t) + 127 * t)
+                        
+                    bw, bh = 3.6, 2.0
+                    body_poly = [(sgx, sgy - bh), (sgx + bw, sgy), (sgx, sgy + bh), (sgx - bw, sgy)]
+                    draw.polygon(body_poly, fill=(cr, cg, cb, 230), outline=(cr, cg, cb, 255))
+
+        # Step 3: Draw Target Cube if it resides at this depth
+        if d == target_d:
+            tx, ty = current_target
+            tgx, tgy = get_iso_coords(tx, ty, dx=dx, dy=dy)
+            
+            # Check target animation state
+            eat_progress = target_state.get("eat_progress", -1) # 0 to 4 frames
+            spawn_progress = target_state.get("spawn_progress", 1.0) # 0.0 to 1.0
+            
+            if eat_progress >= 0:
+                # Eating Animation: flash + expanding shockwave ring + shrink
+                if eat_progress == 0:
+                    # Flash white
+                    cube_h = 6.0
+                    draw.polygon([(tgx, tgy - cube_h), (tgx + 5, tgy - cube_h + 2.5), (tgx, tgy - cube_h + 5), (tgx - 5, tgy - cube_h + 2.5)],
+                                 fill=(255, 255, 255, 255))
+                else:
+                    # Expanding shockwave ring
+                    ring_r = eat_progress * 5.0
+                    draw.ellipse([tgx - ring_r, tgy - ring_r * 0.5, tgx + ring_r, tgy + ring_r * 0.5],
+                                 outline=(182, 255, 0, max(0, 255 - eat_progress * 55)), width=2)
+            else:
+                # Normal or Spawning Target Cube
+                scale = min(1.0, spawn_progress)
+                cube_h = 7.0 * scale
+                cw = 5.5 * scale
+                ch = 2.8 * scale
+                
+                # Soft green pulsing aura
+                draw.ellipse([tgx - cw * 1.8, tgy - ch * 1.8, tgx + cw * 1.8, tgy + ch * 1.8], fill=(57, 255, 20, 35))
+                
+                # Isometric Cube Roof
+                roof_poly = [(tgx, tgy - cube_h), (tgx + cw, tgy - cube_h + ch), (tgx, tgy - cube_h + 2 * ch), (tgx - cw, tgy - cube_h + ch)]
+                draw.polygon(roof_poly, fill=(216, 255, 102, 255), outline=(255, 255, 255, 255))
+                
+                # Cube Left Face
+                left_poly = [(tgx - cw, tgy - cube_h + ch), (tgx, tgy - cube_h + 2 * ch), (tgx, tgy + 2 * ch), (tgx - cw, tgy + ch)]
+                draw.polygon(left_poly, fill=(182, 255, 0, 255))
+                
+                # Cube Right Face
+                right_poly = [(tgx, tgy - cube_h + 2 * ch), (tgx + cw, tgy - cube_h + ch), (tgx + cw, tgy + ch), (tgx, tgy + 2 * ch)]
+                draw.polygon(right_poly, fill=(57, 255, 20, 255))
+
+        # Step 4: Draw Building towers at this depth (OCCLUSION HERO!)
+        for c in c_list:
+            x, y = c["x"], c["y"]
+            h = heights.get((x, y), 0)
+            if h <= 0:
+                continue
+                
+            level = c.get("level", 0)
+            gx, gy = get_iso_coords(x, y, dx=dx, dy=dy)
+            
+            # Palette selection based on level
+            if level == 1:
+                base_col = (0, 160, 220)
+                edge_col = (0, 242, 254)
+            elif level == 2:
+                base_col = (0, 200, 250)
+                edge_col = (0, 242, 254)
+            elif level == 3:
+                base_col = (127, 0, 255)
+                edge_col = (180, 50, 255)
+            else:
+                base_col = (255, 0, 127)
+                edge_col = (255, 80, 160)
+                
+            # Roof Center
+            rx, ry = gx, gy - h
+            
+            # Left Face (Dark Shadow)
+            col_l = (int(base_col[0] * 0.35), int(base_col[1] * 0.35), int(base_col[2] * 0.35), 255)
+            left_poly = [(rx - dx, ry + dy), (rx, ry + 2 * dy), (gx, gy + 2 * dy), (gx - dx, gy + dy)]
+            draw.polygon(left_poly, fill=col_l, outline=(15, 25, 40, 255))
+            
+            # Right Face (Mid Reflection)
+            col_r = (int(base_col[0] * 0.65), int(base_col[1] * 0.65), int(base_col[2] * 0.65), 255)
+            right_poly = [(rx, ry + 2 * dy), (rx + dx, ry + dy), (gx + dx, gy + dy), (gx, gy + 2 * dy)]
+            draw.polygon(right_poly, fill=col_r, outline=(20, 35, 55, 255))
+            
+            # Top Face (Glowing Neon Rooftop)
+            top_poly = [(rx, ry), (rx + dx, ry + dy), (rx, ry + 2 * dy), (rx - dx, ry + dy)]
+            draw.polygon(top_poly, fill=base_col + (255,), outline=edge_col + (255,))
+            
+            # Apex Cyber Antenna Beacon on skyscrapers
+            if h >= 50:
+                draw.ellipse([rx - 1.5, ry - 1.5, rx + 1.5, ry + 1.5], fill=(255, 255, 255, 255))
+
+    return frame.convert("RGB")
 
 
 # ==============================================================================
-# MAIN ENTRYPOINT
+# 5. SIMULATION ORCHESTRATION & EXPORT
+# ==============================================================================
+
+def generate_snake_simulation(cells: list, heights: dict, profile_data: dict, output_dir: str = "generated"):
+    """
+    Simulates the classic Snake game across the 3D isometric contribution city,
+    renders individual frames, and exports:
+      - generated/contribution-city-snake.gif  (universal animated GIF)
+      - generated/contribution-city-snake.webp (crisp animated WebP)
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    gif_path = os.path.join(output_dir, "contribution-city-snake.gif")
+    webp_path = os.path.join(output_dir, "contribution-city-snake.webp")
+    
+    width = 1100
+    height = 620
+    
+    # 1. Pre-render static HUD and background
+    print("[*] Pre-rendering static cyberpunk HUD canvas...")
+    base_canvas = render_base_hud(width, height, profile_data, cells)
+    
+    # 2. Plan pathfinding and game tour
+    master_timeline, targets, leg_ranges = plan_snake_game_tour(cells, heights, "FutureAlok1445")
+    total_frames = len(master_timeline)
+    
+    # 3. Simulate Snake state machine
+    frames = []
+    initial_length = 7
+    current_length = initial_length
+    snake_history = [] # list of (x, y) coordinates
+    
+    print(f"[*] Rendering {total_frames} animated frames with 3D occlusion...")
+    
+    for f_idx in range(total_frames):
+        head_pos = master_timeline[f_idx]
+        snake_history.insert(0, head_pos)
+        
+        # Determine active leg and target
+        active_leg = None
+        for leg in leg_ranges:
+            if leg["start_frame"] <= f_idx <= leg["end_frame"]:
+                active_leg = leg
+                break
+        if active_leg is None:
+            active_leg = leg_ranges[-1]
+            
+        current_target = active_leg["target_pos"]
+        eat_frame = active_leg["eat_frame"]
+        
+        # Calculate target state
+        target_state = {}
+        dist_to_eat = eat_frame - f_idx
+        
+        if 0 <= dist_to_eat <= 3:
+            # Snake is eating target!
+            target_state["eat_progress"] = 3 - dist_to_eat
+            if dist_to_eat == 0:
+                # Snake grows!
+                current_length = min(15, current_length + 1)
+        else:
+            # Spawn transition at start of leg
+            time_since_start = f_idx - active_leg["start_frame"]
+            if time_since_start < 4:
+                target_state["spawn_progress"] = (time_since_start + 1) / 4.0
+            else:
+                target_state["spawn_progress"] = 1.0
+                
+        # Trim snake to current length (or smoothly reset at the very end to loop)
+        if f_idx > total_frames - (initial_length + 4):
+            # Smoothly taper tail to initial length so loop connects seamlessly
+            target_len = initial_length
+            if len(snake_history) > target_len:
+                current_length = max(target_len, current_length - 1)
+                
+        snake_history = snake_history[:current_length]
+        
+        # Render depth-sorted frame
+        img_frame = draw_isometric_frame(base_canvas, f_idx, snake_history, current_target, target_state, cells, heights)
+        frames.append(img_frame)
+        
+    print(f"[✓] Successfully rendered {len(frames)} frames!")
+    
+    # 4. Save Optimized Animated GIF
+    print(f"[*] Compiling optimized animated GIF to {gif_path}...")
+    # Quantize to adaptive 64-color palette for crisp, fast-loading GIF
+    p_frames = [f.convert("P", palette=Image.ADAPTIVE, colors=64) for f in frames]
+    p_frames[0].save(
+        gif_path,
+        save_all=True,
+        append_images=p_frames[1:],
+        duration=80, # 80ms per frame = 12.5 FPS
+        loop=0,      # Loop forever
+        optimize=True
+    )
+    gif_size_kb = os.path.getsize(gif_path) / 1024.0
+    print(f"[✓] Animated GIF exported: {gif_path} ({gif_size_kb:.1f} KB)")
+    
+    # 5. Save High-Definition Animated WebP
+    print(f"[*] Compiling animated WebP to {webp_path}...")
+    frames[0].save(
+        webp_path,
+        save_all=True,
+        append_images=frames[1:],
+        duration=80,
+        loop=0,
+        quality=85
+    )
+    webp_size_kb = os.path.getsize(webp_path) / 1024.0
+    print(f"[✓] Animated WebP exported: {webp_path} ({webp_size_kb:.1f} KB)")
+    
+    return gif_path
+
+
+# ==============================================================================
+# 6. MAIN CLI DISPATCHER
 # ==============================================================================
 
 def main():
@@ -812,27 +891,29 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1]:
         username = sys.argv[1]
 
-    output_path = "generated/contribution-city-snake.svg"
+    output_dir = "generated"
     if len(sys.argv) > 2 and sys.argv[2]:
-        output_path = sys.argv[2]
+        # If a specific file path was provided, use its directory
+        arg_path = sys.argv[2]
+        if arg_path.endswith(".svg") or arg_path.endswith(".gif") or arg_path.endswith(".webp"):
+            output_dir = os.path.dirname(arg_path) or "generated"
+        else:
+            output_dir = arg_path
 
-    print(f"[*] Starting 3D Contribution City motion generator for user: {username}")
+    print(f"[*] Starting 3D Contribution City Snake Game generator for: {username}")
     
     # 1. Fetch real contributions
     cells = fetch_contribution_calendar(username, token)
     
-    # 2. Compute 3D building heights
+    # 2. Calculate real building heights
     heights = calculate_building_heights(cells)
     
     # 3. Fetch telemetry & repo stats
     profile_data = fetch_profile_data(username, token)
     
-    # 4. Compose complete animated scene
-    svg_code = compose_scene(cells, heights, profile_data)
-    
-    # 5. Save output
-    save_output(svg_code, output_path)
-    print("[✓] Contribution City motion generation completed successfully!")
+    # 4. Generate the full procedural simulation & animated asset
+    generate_snake_simulation(cells, heights, profile_data, output_dir=output_dir)
+    print("[✓] 3D Contribution City Snake game generated successfully!")
 
 
 if __name__ == "__main__":
