@@ -61,7 +61,7 @@
     <circle cx="20" cy="6" r="4" fill="#7F00FF" />
     <circle cx="34" cy="6" r="4" fill="#FF007F" />
     <text x="52" y="10" class="hud-title">3D CONTRIBUTION CITY // DIGITAL SERPENT PULSE ENGINE</text>
-    <text x="1120" y="10" class="hud-meta" text-anchor="end">RANGE: <tspan fill="#00F2FE">2025-09-28</tspan> → <tspan fill="#00F2FE">2026-09-26</tspan> | SYSTEM: <tspan class="hud-badge">ONLINE</tspan></text>
+    <text x="1120" y="10" class="hud-meta" text-anchor="end">RANGE: <tspan fill="#00F2FE">2025-09-28</tspan> → <tspan fill="#00F2FE">2026-10-01</tspan> | SYSTEM: <tspan class="hud-badge">ONLINE</tspan></text>
     <line x1="0" y1="22" x2="1120" y2="22" stroke="#162032" stroke-width="1" />
   </g>
 
@@ -278,10 +278,10 @@
 <polygon points="356.0,304.8 366.0,310.0 366.0,324.0 356.0,318.8" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="366.0,310.0 376.0,304.8 376.0,318.8 366.0,324.0" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="366.0,299.6 376.0,304.8 366.0,310.0 356.0,304.8" fill="#004B6E" stroke="#00F2FE" stroke-width="0.9" />
-<polygon points="338.2,236.1 348.2,241.3 348.2,330.3 338.2,325.1" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="348.2,241.3 358.2,236.1 358.2,325.1 348.2,330.3" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="348.2,230.9 358.2,236.1 348.2,241.3 338.2,236.1" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
-<circle cx="348.2" cy="236.1" r="1.5" fill="#FFFFFF" opacity="0.9" />
+<polygon points="338.2,233.1 348.2,238.3 348.2,330.3 338.2,325.1" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="348.2,238.3 358.2,233.1 358.2,325.1 348.2,330.3" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="348.2,227.9 358.2,233.1 348.2,238.3 338.2,233.1" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
+<circle cx="348.2" cy="233.1" r="1.5" fill="#FFFFFF" opacity="0.9" />
 <polygon points="330.4,326.1 340.4,331.3 330.4,336.5 320.4,331.3" fill="#080E1A" stroke="#142036" stroke-width="0.75" />
 <polygon points="302.6,323.6 312.6,328.8 312.6,342.8 302.6,337.6" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="312.6,328.8 322.6,323.6 322.6,337.6 312.6,342.8" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
@@ -370,14 +370,14 @@
 <polygon points="344.8,354.6 354.8,359.8 354.8,373.8 344.8,368.6" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="354.8,359.8 364.8,354.6 364.8,368.6 354.8,373.8" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="354.8,349.4 364.8,354.6 354.8,359.8 344.8,354.6" fill="#004B6E" stroke="#00F2FE" stroke-width="0.9" />
-<polygon points="327.0,285.8 337.0,291.0 337.0,380.0 327.0,374.8" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="337.0,291.0 347.0,285.8 347.0,374.8 337.0,380.0" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="337.0,280.6 347.0,285.8 337.0,291.0 327.0,285.8" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
-<circle cx="337.0" cy="285.8" r="1.5" fill="#FFFFFF" opacity="0.9" />
-<polygon points="309.2,292.1 319.2,297.3 319.2,386.3 309.2,381.1" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="319.2,297.3 329.2,292.1 329.2,381.1 319.2,386.3" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="319.2,286.9 329.2,292.1 319.2,297.3 309.2,292.1" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
-<circle cx="319.2" cy="292.1" r="1.5" fill="#FFFFFF" opacity="0.9" />
+<polygon points="327.0,282.8 337.0,288.0 337.0,380.0 327.0,374.8" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="337.0,288.0 347.0,282.8 347.0,374.8 337.0,380.0" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="337.0,277.6 347.0,282.8 337.0,288.0 327.0,282.8" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
+<circle cx="337.0" cy="282.8" r="1.5" fill="#FFFFFF" opacity="0.9" />
+<polygon points="309.2,289.1 319.2,294.3 319.2,386.3 309.2,381.1" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="319.2,294.3 329.2,289.1 329.2,381.1 319.2,386.3" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="319.2,283.9 329.2,289.1 319.2,294.3 309.2,289.1" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
+<circle cx="319.2" cy="289.1" r="1.5" fill="#FFFFFF" opacity="0.9" />
 <polygon points="428.0,334.5 438.0,339.7 438.0,353.7 428.0,348.5" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="438.0,339.7 448.0,334.5 448.0,348.5 438.0,353.7" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="438.0,329.3 448.0,334.5 438.0,339.7 428.0,334.5" fill="#004B6E" stroke="#00F2FE" stroke-width="0.9" />
@@ -391,10 +391,10 @@
 <polygon points="321.2,360.0 331.2,365.2 331.2,391.2 321.2,386.0" fill="#005573" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.85" />
 <polygon points="331.2,365.2 341.2,360.0 341.2,386.0 331.2,391.2" fill="#003A4F" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.85" />
 <polygon points="331.2,354.8 341.2,360.0 331.2,365.2 321.2,360.0" fill="#007A9E" stroke="#00F2FE" stroke-width="0.9" />
-<polygon points="440.0,264.4 450.0,269.6 450.0,358.6 440.0,353.4" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="450.0,269.6 460.0,264.4 460.0,353.4 450.0,358.6" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="450.0,259.2 460.0,264.4 450.0,269.6 440.0,264.4" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
-<circle cx="450.0" cy="264.4" r="1.5" fill="#FFFFFF" opacity="0.9" />
+<polygon points="440.0,261.4 450.0,266.6 450.0,358.6 440.0,353.4" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="450.0,266.6 460.0,261.4 460.0,353.4 450.0,358.6" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="450.0,256.2 460.0,261.4 450.0,266.6 440.0,261.4" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
+<circle cx="450.0" cy="261.4" r="1.5" fill="#FFFFFF" opacity="0.9" />
 <polygon points="432.2,354.5 442.2,359.7 432.2,364.9 422.2,359.7" fill="#080E1A" stroke="#142036" stroke-width="0.75" />
 <polygon points="414.4,360.7 424.4,365.9 414.4,371.1 404.4,365.9" fill="#080E1A" stroke="#142036" stroke-width="0.75" />
 <polygon points="386.6,358.2 396.6,363.4 396.6,377.4 386.6,372.2" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
@@ -605,10 +605,10 @@
 <polygon points="662.2,444.5 672.2,449.7 672.2,463.7 662.2,458.5" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="672.2,449.7 682.2,444.5 682.2,458.5 672.2,463.7" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="672.2,439.3 682.2,444.5 672.2,449.7 662.2,444.5" fill="#004B6E" stroke="#00F2FE" stroke-width="0.9" />
-<polygon points="644.4,375.7 654.4,380.9 654.4,469.9 644.4,464.7" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="654.4,380.9 664.4,375.7 664.4,464.7 654.4,469.9" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
-<polygon points="654.4,370.5 664.4,375.7 654.4,380.9 644.4,375.7" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
-<circle cx="654.4" cy="375.7" r="1.5" fill="#FFFFFF" opacity="0.9" />
+<polygon points="644.4,372.7 654.4,377.9 654.4,469.9 644.4,464.7" fill="#99004C" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="654.4,377.9 664.4,372.7 664.4,464.7 654.4,469.9" fill="#660033" stroke="#FF66B2" stroke-width="0.5" stroke-opacity="1.0" />
+<polygon points="654.4,367.5 664.4,372.7 654.4,377.9 644.4,372.7" fill="#D10068" stroke="#FF66B2" stroke-width="0.9" />
+<circle cx="654.4" cy="372.7" r="1.5" fill="#FFFFFF" opacity="0.9" />
 <polygon points="636.6,465.8 646.6,471.0 636.6,476.2 626.6,471.0" fill="#080E1A" stroke="#142036" stroke-width="0.75" />
 <polygon points="608.8,463.2 618.8,468.4 618.8,482.4 608.8,477.2" fill="#00324A" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
 <polygon points="618.8,468.4 628.8,463.2 628.8,477.2 618.8,482.4" fill="#002030" stroke="#00F2FE" stroke-width="0.5" stroke-opacity="0.7" />
@@ -693,25 +693,25 @@
 
   <!-- Integrated Glowing Neon Snake -->
   <g id="neon-serpent">
-<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 94.1,263.4 Q 109.0,255.8 118.1,273.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 273.7,287.2 Q 277.0,324.9 291.9,318.3 Q 306.8,311.6 313.0,296.2 Q 319.2,280.9 342.8,284.9 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,319.4 Q 450.0,253.2 444.6,336.2 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 612.6,419.9 Q 618.8,452.0 636.6,408.3 Q 654.4,364.5 657.7,423.8 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="#7F00FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" filter="url(#glowBlur)" />
-<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 94.1,263.4 Q 109.0,255.8 118.1,273.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 273.7,287.2 Q 277.0,324.9 291.9,318.3 Q 306.8,311.6 313.0,296.2 Q 319.2,280.9 342.8,284.9 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,319.4 Q 450.0,253.2 444.6,336.2 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 612.6,419.9 Q 618.8,452.0 636.6,408.3 Q 654.4,364.5 657.7,423.8 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="url(#snakeBodyGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
-<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 94.1,263.4 Q 109.0,255.8 118.1,273.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 273.7,287.2 Q 277.0,324.9 291.9,318.3 Q 306.8,311.6 313.0,296.2 Q 319.2,280.9 342.8,284.9 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,319.4 Q 450.0,253.2 444.6,336.2 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 612.6,419.9 Q 618.8,452.0 636.6,408.3 Q 654.4,364.5 657.7,423.8 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 108.6,235.4 Q 138.0,199.8 132.6,245.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 282.4,270.4 Q 294.4,291.3 306.4,290.3 Q 318.4,289.2 318.8,283.5 Q 319.2,277.9 342.8,283.4 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,317.9 Q 450.0,250.2 444.6,334.7 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 621.3,403.1 Q 636.2,418.4 645.3,390.0 Q 654.4,361.5 657.7,422.3 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="#7F00FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.35" filter="url(#glowBlur)" />
+<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 108.6,235.4 Q 138.0,199.8 132.6,245.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 282.4,270.4 Q 294.4,291.3 306.4,290.3 Q 318.4,289.2 318.8,283.5 Q 319.2,277.9 342.8,283.4 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,317.9 Q 450.0,250.2 444.6,334.7 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 621.3,403.1 Q 636.2,418.4 645.3,390.0 Q 654.4,361.5 657.7,422.3 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="url(#snakeBodyGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+<path d="M 55.2,247.2 Q 55.2,247.2 67.2,259.1 Q 79.2,271.1 108.6,235.4 Q 138.0,199.8 132.6,245.3 Q 127.2,290.8 139.2,288.8 Q 151.2,286.7 177.7,263.7 Q 204.2,240.6 201.7,280.5 Q 199.2,320.5 211.2,325.4 Q 223.2,330.4 246.8,289.9 Q 270.4,249.4 282.4,270.4 Q 294.4,291.3 306.4,290.3 Q 318.4,289.2 318.8,283.5 Q 319.2,277.9 342.8,283.4 Q 366.4,289.0 366.8,332.3 Q 367.2,375.6 379.2,380.6 Q 391.2,385.5 420.6,317.9 Q 450.0,250.2 444.6,334.7 Q 439.2,419.3 451.2,417.2 Q 463.2,415.2 475.2,427.1 Q 487.2,439.0 499.2,444.0 Q 511.2,448.9 523.2,453.9 Q 535.2,458.8 553.0,445.5 Q 570.8,432.3 588.6,410.0 Q 606.4,387.8 621.3,403.1 Q 636.2,418.4 645.3,390.0 Q 654.4,361.5 657.7,422.3 Q 661.0,483.0 687.5,443.9 Q 714.0,404.9 714.0,403.9 L 714.0,402.9" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
 <circle cx="55.2" cy="247.2" r="2.2" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="79.2" cy="271.1" r="2.3" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="109.0" cy="255.8" r="2.3" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="138.0" cy="199.8" r="2.3" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="127.2" cy="290.8" r="2.4" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="151.2" cy="286.7" r="2.5" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="204.2" cy="240.6" r="2.6" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="199.2" cy="320.5" r="2.6" fill="#FF007F" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="223.2" cy="330.4" r="2.7" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="270.4" cy="249.4" r="2.8" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="277.0" cy="324.9" r="2.9" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="306.8" cy="311.6" r="2.9" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="319.2" cy="280.9" r="3.0" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="294.4" cy="291.3" r="2.9" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="318.4" cy="289.2" r="2.9" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="319.2" cy="277.9" r="3.0" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="366.4" cy="289.0" r="3.1" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="367.2" cy="375.6" r="3.2" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="391.2" cy="385.5" r="3.2" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="450.0" cy="253.2" r="3.3" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="450.0" cy="250.2" r="3.3" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="439.2" cy="419.3" r="3.4" fill="#7F00FF" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="463.2" cy="415.2" r="3.5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="487.2" cy="439.0" r="3.5" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
@@ -719,8 +719,8 @@
 <circle cx="535.2" cy="458.8" r="3.7" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="570.8" cy="432.3" r="3.8" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="606.4" cy="387.8" r="3.8" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="618.8" cy="452.0" r="3.9" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
-<circle cx="654.4" cy="364.5" r="4.0" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="636.2" cy="418.4" r="3.9" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
+<circle cx="654.4" cy="361.5" r="4.0" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="661.0" cy="483.0" r="4.1" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="714.0" cy="404.9" r="4.1" fill="#00F2FE" stroke="#FFFFFF" stroke-width="0.75" opacity="0.95" />
 <circle cx="714.0" cy="402.9" r="14" fill="#00F2FE" opacity="0.25" filter="url(#glowBlur)" />
@@ -759,26 +759,26 @@
 
 <rect x="860.0" y="360.0" width="320" height="220" rx="8" fill="#0B0F19" fill-opacity="0.8" stroke="#162032" stroke-width="1.2" />
 <text x="875" y="382" fill="#7F00FF" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" letter-spacing="1">&gt; languages.breakdown()</text>
-<path d="M 930.00 412.00 A 68.00 68.00 0 0 1 948.09 545.55 L 941.71 522.41 A 44.00 44.00 0 0 0 930.00 436.00 Z" fill="#00F2FE" stroke="#0B0F19" stroke-width="1.5" />
+<path d="M 930.00 412.00 A 68.00 68.00 0 0 1 937.89 547.54 L 935.11 523.70 A 44.00 44.00 0 0 0 930.00 436.00 Z" fill="#00F2FE" stroke="#0B0F19" stroke-width="1.5" />
 <rect x="1020" y="400" width="10" height="10" rx="2" fill="#00F2FE" />
 <text x="1038" y="410" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">JavaScript</text>
-<text x="1150" y="410" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">45.7%</text>
-<path d="M 948.09 545.55 A 68.00 68.00 0 0 1 867.47 506.73 L 889.54 497.29 A 44.00 44.00 0 0 0 941.71 522.41 Z" fill="#7F00FF" stroke="#0B0F19" stroke-width="1.5" />
+<text x="1150" y="410" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">48.1%</text>
+<path d="M 937.89 547.54 A 68.00 68.00 0 0 1 871.11 514.00 L 891.89 502.00 A 44.00 44.00 0 0 0 935.11 523.70 Z" fill="#7F00FF" stroke="#0B0F19" stroke-width="1.5" />
 <rect x="1020" y="426" width="10" height="10" rx="2" fill="#7F00FF" />
 <text x="1038" y="436" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">TypeScript</text>
-<text x="1150" y="436" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">22.9%</text>
-<path d="M 867.47 506.73 A 68.00 68.00 0 0 1 876.84 437.60 L 895.60 452.57 A 44.00 44.00 0 0 0 889.54 497.29 Z" fill="#FF007F" stroke="#0B0F19" stroke-width="1.5" />
+<text x="1150" y="436" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">18.5%</text>
+<path d="M 871.11 514.00 A 68.00 68.00 0 0 1 862.12 483.95 L 886.07 482.56 A 44.00 44.00 0 0 0 891.89 502.00 Z" fill="#FF007F" stroke="#0B0F19" stroke-width="1.5" />
 <rect x="1020" y="452" width="10" height="10" rx="2" fill="#FF007F" />
-<text x="1038" y="462" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Python</text>
-<text x="1150" y="462" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">17.1%</text>
-<path d="M 876.84 437.60 A 68.00 68.00 0 0 1 906.11 416.34 L 914.54 438.81 A 44.00 44.00 0 0 0 895.60 452.57 Z" fill="#38BDF8" stroke="#0B0F19" stroke-width="1.5" />
+<text x="1038" y="462" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">HTML</text>
+<text x="1150" y="462" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">7.4%</text>
+<path d="M 862.12 483.95 A 68.00 68.00 0 0 1 867.56 453.07 L 889.60 462.57 A 44.00 44.00 0 0 0 886.07 482.56 Z" fill="#38BDF8" stroke="#0B0F19" stroke-width="1.5" />
 <rect x="1020" y="478" width="10" height="10" rx="2" fill="#38BDF8" />
-<text x="1038" y="488" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">HTML</text>
-<text x="1150" y="488" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">8.6%</text>
-<path d="M 906.11 416.34 A 68.00 68.00 0 0 1 930.00 412.00 L 930.00 436.00 A 44.00 44.00 0 0 0 914.54 438.81 Z" fill="#A855F7" stroke="#0B0F19" stroke-width="1.5" />
+<text x="1038" y="488" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Python</text>
+<text x="1150" y="488" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">7.4%</text>
+<path d="M 867.56 453.07 A 68.00 68.00 0 0 1 930.00 412.00 L 930.00 436.00 A 44.00 44.00 0 0 0 889.60 462.57 Z" fill="#A855F7" stroke="#0B0F19" stroke-width="1.5" />
 <rect x="1020" y="504" width="10" height="10" rx="2" fill="#A855F7" />
 <text x="1038" y="514" fill="#FFFFFF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Other</text>
-<text x="1150" y="514" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">5.7%</text>
+<text x="1150" y="514" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="end">18.5%</text>
 <text x="930" y="484" fill="#00F2FE" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" text-anchor="middle">STACK</text>
 
   </g>
